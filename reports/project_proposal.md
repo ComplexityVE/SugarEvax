@@ -25,7 +25,7 @@ We will pair program and implement the replication over the next week.
 
 
 ## Bibliography:
-### [Tax and Evolution in SugarScape](www.cs.vu.nl/~gusz/papers/Tax-and-evolution.ps)
+### [Tax and Evolution in SugarScape](http://www.cs.vu.nl/~gusz/papers/Tax-and-evolution.ps)
 Bäck, Vermeulen, Eiben, S.-H Cheng, P.Wang, Eds., Proceedings of the Second International Workshop on Computational Intelligence in Economics and Financ. JCIS Press, 2002, pp. 1151-1156
 
 This paper implements a SugarScape where taxation on the society and procreation are present. Taxation is implemented so that at each time step, each agent gives up a percentage of their wealth, and the total wealth is redistributed evenly across the population. The percentage taken depends on the wealth of the agent. Evolution is implemented by allowing the agents to reproduce. Each newborn agent gets half of the starting wealth of the father and mother. Its metabolism, vision, age of death, and child bearing age are all influenced by its parents with "Mendelian Rules." The paper finds that with evolution and a taxation system, the sytem has a very high agent population, but lower average wealth, while no taxation or evolution has a low population, but high average wealth. This intuitively makes sense.
