@@ -1,10 +1,10 @@
-Sugar Evax
-
-Abstract: write this last
+# Sugar Evax
+### Authors: Emily Lepert and Vicky McDermott
+We will extend the SugarScape model to implement a taxation system and evolution. We will be using the paper "Tax and Evolution in SugarScape" to compare our results. We plan on extending the work to introduce a secondary species. 
 
 The experiments we are going to replicate involve building up the sugarscape model described in the paper and incurring a tax on the population. We will compare the population with and without tax and see if we are able to generate the same results as they generated for population of agents over time with and without taxation. We will also compare our results for average metabolism over time with and without taxation. The other experiment we will replicate will involve implementing the sexual reproduction and evolutionary aspects of their model and adding that to our implementation of the replicated sugarscape model.
 
-1-3 Experiments for extension: both do
+For our extension, we plan on introducing a secondary species that cannot mate with the original species and vice versa. This species will have the same characteristics as the original agents. We will initially see if there is a difference in the evolution between both species. After, we will introduce attacking or aggressiveness, where an agent can kill another agent of another species and see how they evolve with this new characteristics. The goal of the extension is to simulate more real life characteristics of animals on Earth.
 
 For the replication portion of our project we expect to see these figures (from the original paper).
 
@@ -19,13 +19,12 @@ The figures above are graphs of the characteristics of agents in a society with 
 
 The figures above are graphs of the characteristics of agents in a society with taxation and evolution implemented. Figure 4 shows us that with reproduction implemented, more agents will be produced in a taxed society. This is because in individuals need to be "healthy" to reproduce, and the greater spread of wealth in a taxed society allows more individuals to be "healthy". Interestingly we see that a non-taxed society will have a higher average vision and wealth. This may be because there are less individuals to average values over and the individuals that are successful in a non-taxed society are ones that have a lot of wealth and high vision.
 
+We anticipate some difficulty in computing results from the model as the paper uses a simulation framework, but we will have to use our laptops. The computation time might be bigger than anticipated.
 
-Causes for concern: both do
-
-Next steps: both do
+We will pair program and implement the replication over the next week.
 
 
-Bibliography:
+## Bibliography:
 ### [Tax and Evolution in SugarScape](www.cs.vu.nl/~gusz/papers/Tax-and-evolution.ps)
 Bäck, Vermeulen, Eiben, S.-H Cheng, P.Wang, Eds., Proceedings of the Second International Workshop on Computational Intelligence in Economics and Financ. JCIS Press, 2002, pp. 1151-1156
 
