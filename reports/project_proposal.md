@@ -7,7 +7,8 @@ The experiments we are going to replicate involve building up the sugarscape mod
 1-3 Experiments for extension: both do
 
 For the replication portion of our project we expect to see these figures (from the original paper).
-![](https://github.com/ComplexityVE/SugarEvax/blob/master/images/taxation1.png) ![](https://github.com/ComplexityVE/SugarEvax/blob/master/images/taxation2.png)
+|![](https://github.com/ComplexityVE/SugarEvax/blob/master/images/taxation1.png) | ![](https://github.com/ComplexityVE/SugarEvax/blob/master/images/taxation2.png) | 
+| :---: | :----: |
 The figures above are graphs of the characteristics of agents in a society with taxation implemented. From these results, we conclude that with a taxation system, resources are spread around the system more equally so more agents manage to stay alive. Because there are more agents, the average metabolism of the system is greater than when there are no taxes.
 ![](https://github.com/ComplexityVE/SugarEvax/blob/master/images/evolution3.png) ![](https://github.com/ComplexityVE/SugarEvax/blob/master/images/evolution4.png) ![](https://github.com/ComplexityVE/SugarEvax/blob/master/images/evolution5.png)
 The figures above are graphs of the characteristics of agents in a society with taxation and evolution implemented. Figure 4 shows us that with reproduction implemented, more agents will be produced in a taxed society. This is because in individuals need to be "healthy" to reproduce, and the greater spread of wealth in a taxed society allows more individuals to be "healthy". Interestingly we see that a non-taxed society will have a higher average vision and wealth. This may be because there are less individuals to average values over and the individuals that are successful in a non-taxed society are ones that have a lot of wealth and high vision.
