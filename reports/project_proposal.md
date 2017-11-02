@@ -2,8 +2,6 @@ Sugar Evax
 
 Abstract: write this last
 
-
-
 1-3 Experiments for replication: The experiments we are going to replicate involve building up the sugarscape model described in the paper and incurring a tax on the population. We will compare the population with and without tax and see if we are able to generate the same results as they generated for population of agents over time with and without taxation. We will also compare our results for average metabolism over time with and without taxation. The other experiment we will replicate will involve implementing the sexual reproduction and evolutionary aspects of their model and adding that to our implementation of the replicated sugarscape model.
 
 1-3 Experiments for extension: both do
