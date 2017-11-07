@@ -16,6 +16,19 @@ def make_locs(n, m):
     right = np.tile(np.arange(n), m)
     return np.transpose([left, right])
 
+def make_visible_locs(vision):
+    """Computes the kernel of visible cells.
+        
+    vision: int distance
+    """
+    def make_array(d):
+        """Generates visible cells with increasing distance."""
+        a = np.array([[-d, 0], [d, 0], [0, -d], [0, d]])
+        np.random.shuffle(a)
+        return a
+                     
+    arrays = [make_array(d) for d in range(1, vision+1)]
+    return np.vstack(arrays)
 
 class Sugarscape(Cell2D):
     """Represents an Epstein-Axtell Sugarscape."""
@@ -266,4 +279,5 @@ class Agent:
 if __name__ == '__main__':
     env = Sugarscape(50, num_agents=400)
     viewer = SugarscapeViewer(env)
-    viewer.draw()
+    anim = viewer.animate(frames=500)
+    plt.show()
