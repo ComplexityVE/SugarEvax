@@ -20,7 +20,6 @@ def make_locs(n, m):
 
 def make_visible_locs(vision):
     """Computes the kernel of visible cells.
-        
     vision: int distance
     """
     def make_array(d):
@@ -28,7 +27,7 @@ def make_visible_locs(vision):
         a = np.array([[-d, 0], [d, 0], [0, -d], [0, d]])
         np.random.shuffle(a)
         return a
-                     
+
     arrays = [make_array(d) for d in range(1, vision+1)]
     return np.vstack(arrays)
 
