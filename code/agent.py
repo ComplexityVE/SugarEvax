@@ -30,8 +30,9 @@ class Agent:
 
         env: Sugarscape
         """
+        self.calculate_tax()
         self.loc = env.look_around(self.loc, self.vision)
-        self.sugar += env.harvest(self.loc) - self.metabolism
+        self.sugar += env.harvest(self.loc) - self.metabolism - self.tax
         self.age += 1
 
     def is_starving(self):
@@ -42,3 +43,15 @@ class Agent:
         """Checks if lifespan is exceeded."""
         return self.age > self.lifespan
 
+    def get_wealth(self):
+        return self.sugar
+
+    def calculate_tax(self):
+        if self.sugar <= 5:
+            self.tax = self.sugar * .3
+        elif self.sugar > 5 and self.sugar <= 12:
+            self.tax = 1.5 + ((self.sugar-5)*.4)
+        elif self.sugar >12 and self.sugar <= 20:
+            self.tax = 4.8 + ((self.sugar-12)*.5)
+        else:
+            self.tax = 10 + ((self.sugar-20)*.6)
