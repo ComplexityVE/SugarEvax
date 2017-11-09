@@ -31,8 +31,9 @@ class Agent:
         env: Sugarscape
         """
         self.calculate_tax()
+        self.redistribute_wealth(env.get_welfare())
         self.loc = env.look_around(self.loc, self.vision)
-        self.sugar += env.harvest(self.loc) - self.metabolism - self.tax
+        self.sugar += env.harvest(self.loc) - self.metabolism - self.tax + self.welfare
         self.age += 1
 
     def is_starving(self):
@@ -45,6 +46,9 @@ class Agent:
 
     def get_wealth(self):
         return self.sugar
+
+    def redistribute_wealth(self, welfare):
+        self.welfare = welfare
 
     def calculate_tax(self):
         if self.sugar <= 5:

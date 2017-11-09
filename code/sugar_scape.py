@@ -42,6 +42,7 @@ class Sugarscape(Cell2D):
         """
         self.n = n
         self.params = params
+        self.total_welfare = 0
 
         # track variables
         self.agent_count_seq = []
@@ -142,6 +143,7 @@ class Sugarscape(Cell2D):
 
     def step(self):
         """Executes one time step."""
+        total_welfare = 0
         replace = self.params.get('replace', False)
 
         # loop through the agents in random order
@@ -150,6 +152,8 @@ class Sugarscape(Cell2D):
 
             # mark the current cell unoccupied
             self.occupied.remove(agent.loc)
+
+            total_welfare += agent.get_wealth()
 
             # execute one step
             agent.step(self)
@@ -168,7 +172,13 @@ class Sugarscape(Cell2D):
 
         # grow back some sugar
         self.grow()
+        self.total_welfare = total_welfare
         return len(self.agents)
+
+    def get_welfare(self):
+        if len(self.agents) == 0:
+            return 0
+        return self.total_welfare / len(self.agents)
 
     def add_agent(self):
         """Generates a new random agent.
