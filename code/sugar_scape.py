@@ -170,6 +170,9 @@ class Sugarscape(Cell2D):
         self.grow()
         return len(self.agents)
 
+    def mating(self, agent):
+        
+
     def add_agent(self):
         """Generates a new random agent.
 
