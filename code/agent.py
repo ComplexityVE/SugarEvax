@@ -2,7 +2,7 @@ import numpy as np
 
 class Agent:
 
-    def __init__(self, loc, params):
+    def __init__(self, loc, taxation, params):
         """Creates a new agent at the given location.
 
         loc: tuple coordinates
@@ -10,12 +10,13 @@ class Agent:
         """
         self.loc = tuple(loc)
         self.age = 0
+        self.taxation = taxation
 
         # extract the parameters
         max_vision = params.get('max_vision', 6)
         max_metabolism = params.get('max_metabolism', 4)
-        min_lifespan = params.get('min_lifespan', 10000)
-        max_lifespan = params.get('max_lifespan', 10000)
+        min_lifespan = params.get('min_lifespan', 99998)
+        max_lifespan = params.get('max_lifespan', 100000)
         min_sugar = params.get('min_sugar', 5)
         max_sugar = params.get('max_sugar', 25)
 
@@ -33,7 +34,10 @@ class Agent:
         self.calculate_tax()
         self.redistribute_wealth(env.get_welfare())
         self.loc = env.look_around(self.loc, self.vision)
-        self.sugar += env.harvest(self.loc) - self.metabolism - self.tax + self.welfare
+        if self.taxation:
+            self.sugar = self.sugar + env.harvest(self.loc) - self.metabolism - self.tax + self.welfare
+        else:
+            self.sugar = self.sugar + env.harvest(self.loc) - self.metabolism
         self.age += 1
 
     def is_starving(self):
@@ -59,3 +63,7 @@ class Agent:
             self.tax = 4.8 + ((self.sugar-12)*.5)
         else:
             self.tax = 10 + ((self.sugar-20)*.6)
+
+    def get_tax(self):
+        self.calculate_tax()
+        return self.tax

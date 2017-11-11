@@ -34,7 +34,7 @@ def make_visible_locs(vision):
 class Sugarscape(Cell2D):
     """Represents an Epstein-Axtell Sugarscape."""
 
-    def __init__(self, n, **params):
+    def __init__(self, n, taxation, **params):
         """Initializes the attributes.
 
         n: number of rows and columns
@@ -43,6 +43,7 @@ class Sugarscape(Cell2D):
         self.n = n
         self.params = params
         self.total_welfare = 0
+        self.taxation = taxation
 
         # track variables
         self.agent_count_seq = []
@@ -90,7 +91,7 @@ class Sugarscape(Cell2D):
 
         # make the agents
         num_agents = self.params.get('num_agents', 400)
-        self.agents = [Agent(locs[i], self.params)
+        self.agents = [Agent(locs[i], self.taxation, self.params)
                        for i in range(num_agents)]
 
         # keep track of which cells are occupied
@@ -153,7 +154,7 @@ class Sugarscape(Cell2D):
             # mark the current cell unoccupied
             self.occupied.remove(agent.loc)
 
-            total_welfare += agent.get_wealth()
+            total_welfare += agent.get_tax()
 
             # execute one step
             agent.step(self)
@@ -200,10 +201,18 @@ class Sugarscape(Cell2D):
             if loc not in self.occupied:
                 return loc
 
+    def plot_populations(self):
+        plt.plot(self.agent_count_seq)
+
 
 
 if __name__ == '__main__':
-    env = Sugarscape(50, num_agents=400)
-    viewer = SugarscapeViewer(env)
-    anim = viewer.animate(frames=500)
+    env = Sugarscape(50, True, num_agents=400)
+    for i in range(800):
+        env.step()
+    env.plot_populations()
+    env = Sugarscape(50, False, num_agents=400)
+    for i in range(800):
+        env.step()
+    env.plot_populations()
     plt.show()
