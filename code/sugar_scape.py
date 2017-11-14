@@ -47,6 +47,7 @@ class Sugarscape(Cell2D):
 
         # track variables
         self.agent_count_seq = []
+        self.agent_metabolism_seq = []
 
         # make the capacity array
         self.capacity = self.make_capacity()
@@ -147,14 +148,15 @@ class Sugarscape(Cell2D):
         total_welfare = 0
         replace = self.params.get('replace', False)
 
+        taxes = [agent.get_tax() for agent in self.agents]
+        self.total_welfare = sum(taxes)
+
         # loop through the agents in random order
         random_order = np.random.permutation(self.agents)
         for agent in random_order:
 
             # mark the current cell unoccupied
             self.occupied.remove(agent.loc)
-
-            total_welfare += agent.get_tax()
 
             # execute one step
             agent.step(self)
@@ -170,10 +172,11 @@ class Sugarscape(Cell2D):
 
         # update the time series
         self.agent_count_seq.append(len(self.agents))
+        metabolisms = [agent.metabolism for agent in self.agents]
+        self.agent_metabolism_seq.append(np.mean(metabolisms))
 
         # grow back some sugar
         self.grow()
-        self.total_welfare = total_welfare
         return len(self.agents)
 
     def get_welfare(self):
@@ -203,6 +206,9 @@ class Sugarscape(Cell2D):
 
     def plot_populations(self):
         plt.plot(self.agent_count_seq)
+
+    def plot_avg_metabolisms(self):
+        plt.plot(self.agent_metabolism_seq)
 
 
 
