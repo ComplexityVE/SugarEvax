@@ -20,6 +20,7 @@ class Agent:
 		min_end_child_f = params.get('min_end_child_f', 40)
 		max_end_child_f = params.get('max_end_child_f', 50)
 
+		# if this is a product of an agent mating 
 		if baby == True:
 			self.vision = params.get('vision')
 			self.metabolism = params.get('metabolism')
@@ -27,6 +28,7 @@ class Agent:
 			self.sugar = params.get('sugar')
 			self.beg_reproduction_age = params.get('child')
 
+		# if this is the initial generating of agents
 		else:
 			min_beg_child = params.get('min_beg_child', 12)
 			max_beg_child = params.get('max_beg_child', 15)
@@ -54,6 +56,7 @@ class Agent:
 			self.sugar = np.random.uniform(min_sugar, max_sugar)
 		
 			self.beg_reproduction_age = np.random.uniform(min_beg_child, max_beg_child)
+		
 		self.init_sugar = self.sugar
 		self.sex = random.choice(['female','male'])
 		if self.sex == 'female':

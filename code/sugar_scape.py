@@ -33,6 +33,7 @@ def make_visible_locs(vision):
 	return np.vstack(arrays)
 
 def make_neighbors_locs():
+	""" Makes array of neighbors"""
 	neighbors = np.array([[-1, 0], [1, 0], [0, -1], [0, 1]])
 	np.random.shuffle(neighbors)
 	return neighbors
@@ -60,6 +61,8 @@ class Sugarscape(Cell2D):
 
 		# make the agents
 		self.make_agents()
+
+		# Stuff to keep track of for graphing
 		self.population = [len(self.agents)]
 		self.vision = [np.mean([agent.vision for agent in self.agents])]
 		self.wealth = [np.mean([agent.sugar for agent in self.agents])]
@@ -177,9 +180,11 @@ class Sugarscape(Cell2D):
 
 		# grow back some sugar
 		self.grow()
+
+		# initialize mating
 		self.mating()
-		#print(len(self.agents))
 		
+		# update array of values for graphing
 		self.population.append(len(self.agents))
 		self.vision.append(np.mean([agent.vision for agent in self.agents]))
 		self.wealth.append(np.mean([agent.sugar for agent in self.agents]))
@@ -187,14 +192,20 @@ class Sugarscape(Cell2D):
 		return len(self.agents)
 
 	def mating(self):
+		""" mates agents and creates new babies """
 		random_order = np.random.permutation(self.agents)
 		self.mating_pairs = {}
+
+		# for each agent, find all possible mates in its neighbors
 		for agent in random_order:
 			if agent.can_mate == True:
 				self.find_mate(agent)
+
 		prev_set = self.mating_pairs
+		# create sets of agents that can mate at the same time
+		# mate them, and generate new set until no more matings possible
 		while self.mating_pairs:
-			#print(self.mating_pairs)
+			
 			mating_set = self.mating_set()
 			self.mate_agents(mating_set)
 			if prev_set == self.mating_pairs:
@@ -204,26 +215,35 @@ class Sugarscape(Cell2D):
 
 
 	def mating_set(self):
+		""" generates all possible simulatenous matings"""
 		mating_set=[]
 		already_mated = []
 		
-		#self.mating_pairs = sorted(self.mating_pairs, key=lambda k: len(self.mating_pairs[k]))
-		#print(self.mating_pairs)
+		
 		for agent in self.mating_pairs:
+			# updates the agents ability to mate
 			agent.mating_conditions()
 			if agent not in already_mated and agent.can_mate == True:
+				# if only one possible mating
 				if len(self.mating_pairs[agent])==1:
 					mate = self.mating_pairs[agent][0]
+					# check if mate can mate
 					mate.mating_conditions()
 					if mate not in already_mated and mate.can_mate == True:
-						
 						already_mated.append(agent)
 						already_mated.append(mate)
 						mating_set.append((agent,mate))
+					# remove both agents no matter if they mated or not
+					# bc if they didn't, that means they can't anymore
 					self.mating_pairs[mate].remove(agent)
 					self.mating_pairs[agent].remove(mate)
+
+				# if more than one possibility
 				elif len(self.mating_pairs[agent])>1:
 					mates = copy.copy(self.mating_pairs[agent])
+
+					# randomly loop through all mateable neighbors until 
+					# one is found or none can mate
 					for i in range(len(self.mating_pairs[agent])):
 						mate = random.choice(mates)
 						mates.remove(mate)
@@ -238,17 +258,12 @@ class Sugarscape(Cell2D):
 								break
 							
 
-
+		# removes all agents that no longer have any partners
 		self.mating_pairs = {k:v for k,v in self.mating_pairs.items() if v!=[]}
 		return mating_set
 
 	def find_mate(self, agent):
-		"""Finds the visible cell with the most sugar.
-
-		center: tuple, coordinates of the center cell
-		vision: int, maximum visible distance
-
-		returns: tuple, coordinates of best cell
+		"""Finds the neighbors that can mate
 		"""
 		# find all visible cells
 		locs = make_neighbors_locs()
@@ -269,6 +284,7 @@ class Sugarscape(Cell2D):
 				self.mating_pairs[agent] += [mate]
 
 	def find_baby_site(self,agents):
+		""" find location for baby to be born """
 		for agent in agents:
 			# find all visible cells
 			locs = make_visible_locs(1)
@@ -280,26 +296,30 @@ class Sugarscape(Cell2D):
 			# select unoccupied cells
 			empty_locs = [loc for loc in locs if loc not in self.occupied]
 
-			# if all visible cells are occupied, stay put
+			# if all visible cells are occupied, then do nothing
 			if len(empty_locs) == 0:
 				pass
 			else:
-				# find the best one and return it
-				# (in case of tie, argmax returns the first, which
-				# is the closest)
+				# randomly choose a place for baby from possibilities
 				i = random.choice(empty_locs)
 				return i
+		# if no empty location was found return None
 		return None
 
 	def mate_agents(self, mating_set):
+		""" mates a pair of agents"""
+
 		for mate_pair in mating_set:
 			mate1 = mate_pair[0]
 			mate2 = mate_pair[1]
 			loc = self.find_baby_site(mate_pair)
 			if loc != None:
 				params = {}
+				# both parents donate half of their initial sugars
 				mate1.sugar -= mate1.init_sugar/2
 				mate2.sugar -= mate2.init_sugar/2
+
+				# sets the parameters for baby
 				params['sugar'] = (mate1.init_sugar+mate2.init_sugar)/2
 				params['death_age'] = random.choice([mate1.lifespan,mate2.lifespan])
 				params['metabolism'] = random.choice([mate1.metabolism,mate2.metabolism])
@@ -309,7 +329,7 @@ class Sugarscape(Cell2D):
 
 
 	def add_baby(self, loc, params, baby=False):
-		"""Generates a new random agent.
+		"""Generates a new agent.
 
 		returns: new Agent
 		"""
