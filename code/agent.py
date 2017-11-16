@@ -39,9 +39,13 @@ class Agent:
 
 			min_sugar = params.get('min_sugar', 50.0)
 			max_sugar = params.get('max_sugar', 100.0)
+			#min_sugar = params.get('min_sugar', 5.0)
+			#max_sugar = params.get('max_sugar', 25.0)
 
 			min_death = params.get('min_death', 60)
 			max_death = params.get('max_death', 100)
+			#min_death = params.get('min_death', 998800)
+			#max_death = params.get('max_death', 1000000)
 
 			# choose attributes
 			self.vision = np.random.random_integers(min_vision,max_vision)

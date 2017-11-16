@@ -177,7 +177,7 @@ class Sugarscape(Cell2D):
 
 		# grow back some sugar
 		self.grow()
-		# self.mating()
+		self.mating()
 		#print(len(self.agents))
 		
 		self.population.append(len(self.agents))
@@ -344,7 +344,7 @@ if __name__ == '__main__':
 	wealth = []
 	vision = []
 	metabolism = []
-	for j in range(10):
+	for j in range(5):
 		env = Sugarscape(50, num_agents=400)
 		for i in range(800):
 			env.step()
@@ -353,12 +353,12 @@ if __name__ == '__main__':
 		wealth.append(env.wealth)
 		vision.append(env.vision)
 		metabolism.append(env.metabolism)
-		print(metabolism)
+	
 
 	time = np.arange(801)
+	#pop_time = np.arange(100)
 	av_pop = np.mean(populations, axis=0)
 	av_wealth = np.mean(wealth, axis=0)
-	print(len(av_wealth))
 	av_vision = np.mean(vision, axis=0)
 	av_metabolism = np.mean(metabolism, axis=0)
 
