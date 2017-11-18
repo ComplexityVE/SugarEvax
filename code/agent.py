@@ -12,7 +12,7 @@ class Agent:
 		self.loc = tuple(loc)
 		self.age = 0
 
-		
+
 
 		min_end_child_m = params.get('min_end_child_m', 50)
 		max_end_child_m = params.get('max_end_child_m', 60)
@@ -20,7 +20,7 @@ class Agent:
 		min_end_child_f = params.get('min_end_child_f', 40)
 		max_end_child_f = params.get('max_end_child_f', 50)
 
-		# if this is a product of an agent mating 
+		# if this is a product of an agent mating
 		if baby == True:
 			self.vision = params.get('vision')
 			self.metabolism = params.get('metabolism')
@@ -54,9 +54,9 @@ class Agent:
 			self.metabolism = np.random.uniform(min_metabolism, max_metabolism)
 			self.lifespan = np.random.uniform(min_death, max_death)
 			self.sugar = np.random.uniform(min_sugar, max_sugar)
-		
+
 			self.beg_reproduction_age = np.random.uniform(min_beg_child, max_beg_child)
-		
+
 		self.init_sugar = self.sugar
 		self.sex = random.choice(['female','male'])
 		if self.sex == 'female':
@@ -76,7 +76,7 @@ class Agent:
 		self.sugar += env.harvest(self.loc) - self.metabolism
 		self.age += 1
 		self.mating_conditions()
-		
+
 
 	def is_starving(self):
 		"""Checks if sugar has gone negative."""
@@ -99,4 +99,3 @@ class Agent:
 			self.can_mate = True
 		else:
 			self.can_mate = False
-

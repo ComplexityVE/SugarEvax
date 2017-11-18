@@ -41,7 +41,7 @@ def make_neighbors_locs():
 class Sugarscape(Cell2D):
 	"""Represents an Epstein-Axtell Sugarscape."""
 
-	def __init__(self, n, **params):
+	def __init__(self, n, mating_env=True, **params):
 		"""Initializes the attributes.
 
 		n: number of rows and columns
@@ -49,6 +49,7 @@ class Sugarscape(Cell2D):
 		"""
 		self.n = n
 		self.params = params
+		self.mating_env = mating_env
 
 		# track variables
 		self.agent_count_seq = []
@@ -60,7 +61,11 @@ class Sugarscape(Cell2D):
 		self.array = self.capacity.copy()
 
 		# make the agents
+		self.agents = []
+		self.occupied = set()
+		self.agent_loc_dict = {}
 		self.make_agents()
+
 
 		# Stuff to keep track of for graphing
 		self.population = [len(self.agents)]
@@ -96,15 +101,14 @@ class Sugarscape(Cell2D):
 		"""Makes the agents."""
 
 		# determine where the agents start and generate locations
-		n, m = self.params.get('starting_box', self.array.shape)
-		locs = make_locs(n, m)
-		np.random.shuffle(locs)
-		self.agent_dict = {}
+		#n, m = self.params.get('starting_box', self.array.shape)
+		#locs = make_locs(n, m)
+		#np.random.shuffle(locs)
 		# make the agents
 		num_agents = self.params.get('num_agents', 400)
 
-		self.agents = [Agent(locs[i], self.params)
-					   for i in range(num_agents)]
+		for i in range(num_agents):
+			self.add_agent()
 
 		# keep track of which cells are occupied
 		self.occupied = set(agent.loc for agent in self.agents)
@@ -163,6 +167,8 @@ class Sugarscape(Cell2D):
 
 			# mark the current cell unoccupied
 			self.occupied.remove(agent.loc)
+			del self.agent_loc_dict[agent.loc]
+
 
 			# execute one step
 			agent.step(self)
@@ -170,9 +176,9 @@ class Sugarscape(Cell2D):
 			# if the agent is dead, remove from the list
 			if agent.is_starving() or agent.is_old():
 				self.agents.remove(agent)
-			
 			else:
 				# otherwise mark its cell occupied
+				self.agent_loc_dict[agent.loc] = agent
 				self.occupied.add(agent.loc)
 
 		# update the time series
@@ -181,10 +187,12 @@ class Sugarscape(Cell2D):
 		# grow back some sugar
 		self.grow()
 
-		# initialize mating
-		self.mating()
-		
+		if self.mating_env:
+			# initialize mating
+			self.mating()
+
 		# update array of values for graphing
+		#TODO: pick one self.population and self.agent_count_seq are literally same thing
 		self.population.append(len(self.agents))
 		self.vision.append(np.mean([agent.vision for agent in self.agents]))
 		self.wealth.append(np.mean([agent.sugar for agent in self.agents]))
@@ -198,14 +206,14 @@ class Sugarscape(Cell2D):
 
 		# for each agent, find all possible mates in its neighbors
 		for agent in random_order:
-			if agent.can_mate == True:
+			if agent.can_mate:
 				self.find_mate(agent)
 
 		prev_set = self.mating_pairs
 		# create sets of agents that can mate at the same time
 		# mate them, and generate new set until no more matings possible
 		while self.mating_pairs:
-			
+
 			mating_set = self.mating_set()
 			self.mate_agents(mating_set)
 			if prev_set == self.mating_pairs:
@@ -218,18 +226,21 @@ class Sugarscape(Cell2D):
 		""" generates all possible simulatenous matings"""
 		mating_set=[]
 		already_mated = []
-		
-		
+
+
+		#TODO: rename this to mean what it is (single agent or pairs?)
 		for agent in self.mating_pairs:
 			# updates the agents ability to mate
 			agent.mating_conditions()
-			if agent not in already_mated and agent.can_mate == True:
+			# if agent not in already_mated and agent.can_mate:
+			if agent.can_mate:
 				# if only one possible mating
 				if len(self.mating_pairs[agent])==1:
 					mate = self.mating_pairs[agent][0]
 					# check if mate can mate
 					mate.mating_conditions()
-					if mate not in already_mated and mate.can_mate == True:
+					# if mate not in already_mated and mate.can_mate:
+					if mate.can_mate:
 						already_mated.append(agent)
 						already_mated.append(mate)
 						mating_set.append((agent,mate))
@@ -242,21 +253,21 @@ class Sugarscape(Cell2D):
 				elif len(self.mating_pairs[agent])>1:
 					mates = copy.copy(self.mating_pairs[agent])
 
-					# randomly loop through all mateable neighbors until 
+					# randomly loop through all mateable neighbors until
 					# one is found or none can mate
 					for i in range(len(self.mating_pairs[agent])):
 						mate = random.choice(mates)
 						mates.remove(mate)
 						mate.mating_conditions()
 						if mate.can_mate==True:
-							if mate not in already_mated:
-								already_mated.append(agent)
-								already_mated.append(mate)
-								self.mating_pairs[mate].remove(agent)
-								self.mating_pairs[agent].remove(mate)
-								mating_set.append((agent,mate))
-								break
-							
+							#if mate not in already_mated:
+							already_mated.append(agent)
+							already_mated.append(mate)
+							self.mating_pairs[mate].remove(agent)
+							self.mating_pairs[agent].remove(mate)
+							mating_set.append((agent,mate))
+							break
+
 
 		# removes all agents that no longer have any partners
 		self.mating_pairs = {k:v for k,v in self.mating_pairs.items() if v!=[]}
@@ -265,7 +276,7 @@ class Sugarscape(Cell2D):
 	def find_mate(self, agent):
 		"""Finds the neighbors that can mate
 		"""
-		# find all visible cells
+		# find all the neighbors
 		locs = make_neighbors_locs()
 		locs = (locs + agent.loc) % self.n
 
@@ -275,13 +286,16 @@ class Sugarscape(Cell2D):
 		# select occupied cells
 		occupied_locs = [loc for loc in locs if loc in self.occupied]
 
-		valid_mates = []
-		for mate in self.agents:
-			if mate.loc in occupied_locs and mate.can_mate == True and agent.sex != mate.sex:
-				if self.mating_pairs.get(agent) == None:
-					self.mating_pairs[agent] = []
-				
-				self.mating_pairs[agent] += [mate]
+		for loc in occupied_locs:
+			try:
+				if self.agent_loc_dict[loc].can_mate and agent.sex != self.agent_loc_dict[loc].sex:
+					if self.mating_pairs.get(agent) == None:
+						self.mating_pairs[agent] = []
+
+					self.mating_pairs[agent] += [self.agent_loc_dict[loc]]
+			except(KeyError):
+				# this means it is a neighbor which does not have an agent (tis unoccupied)
+				pass
 
 	def find_baby_site(self,agents):
 		""" find location for baby to be born """
@@ -335,6 +349,7 @@ class Sugarscape(Cell2D):
 		"""
 		new_agent = Agent(loc, params,baby)
 		self.agents.append(new_agent)
+		self.agent_loc_dict[new_agent.loc] = new_agent
 		self.occupied.add(new_agent.loc)
 		return new_agent
 
@@ -344,6 +359,7 @@ class Sugarscape(Cell2D):
 		"""
 		new_agent = Agent(self.random_loc(), self.params)
 		self.agents.append(new_agent)
+		self.agent_loc_dict[new_agent.loc] = new_agent
 		self.occupied.add(new_agent.loc)
 		return new_agent
 
@@ -360,45 +376,45 @@ class Sugarscape(Cell2D):
 
 
 if __name__ == '__main__':
-	populations=[]
-	wealth = []
-	vision = []
-	metabolism = []
-	for j in range(5):
-		env = Sugarscape(50, num_agents=400)
-		for i in range(800):
-			env.step()
-		print(j)
-		populations.append(env.population)
-		wealth.append(env.wealth)
-		vision.append(env.vision)
-		metabolism.append(env.metabolism)
-	
+	# populations=[]
+	# wealth = []
+	# vision = []
+	# metabolism = []
+	# for j in range(5):
+	env = Sugarscape(50, num_agents=400)
+	for i in range(800):
+		env.step()
+	# print(j)
+	# 	populations.append(env.population)
+	# 	wealth.append(env.wealth)
+	# 	vision.append(env.vision)
+	# 	metabolism.append(env.metabolism)
 
-	time = np.arange(801)
-	#pop_time = np.arange(100)
-	av_pop = np.mean(populations, axis=0)
-	av_wealth = np.mean(wealth, axis=0)
-	av_vision = np.mean(vision, axis=0)
-	av_metabolism = np.mean(metabolism, axis=0)
+
+	# time = np.arange(801)
+	# #pop_time = np.arange(100)
+	# av_pop = np.mean(populations, axis=0)
+	# av_wealth = np.mean(wealth, axis=0)
+	# av_vision = np.mean(vision, axis=0)
+	# av_metabolism = np.mean(metabolism, axis=0)
 
 	plt.subplot(2, 2, 1)
-	plt.plot(time, av_pop)
+	plt.plot(env.population)
 	plt.xlabel('Time')
 	plt.ylabel('Average Population')
 
 	plt.subplot(2, 2, 2)
-	plt.plot(time, av_wealth)
+	plt.plot(env.wealth)
 	plt.xlabel('Time')
 	plt.ylabel('Average Wealth')
 
 	plt.subplot(2, 2, 3)
-	plt.plot(time, av_vision)
+	plt.plot(env.vision)
 	plt.xlabel('Time')
 	plt.ylabel('Average Vision')
 
 	plt.subplot(2, 2, 4)
-	plt.plot(time,av_metabolism)
+	plt.plot(env.metabolism)
 	plt.xlabel('Time')
 	plt.ylabel('Average Metabolism')
 	plt.show()
