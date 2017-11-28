@@ -382,10 +382,12 @@ if __name__ == '__main__':
 	# metabolism = []
 	# for j in range(5):
 	env = Sugarscape(50, num_agents=400)
-	viewer = SugarscapeViewer(env)
-	plt.show()
-	# for i in range(800):
-	# 	env.step()
+	# viewer = SugarscapeViewer(env)
+	# anim = viewer.animate(frames=500)
+
+	# plt.show()
+	for i in range(800):
+	 	env.step()
 
 	# print(j)
 	# 	populations.append(env.population)
@@ -401,23 +403,23 @@ if __name__ == '__main__':
 	# av_vision = np.mean(vision, axis=0)
 	# av_metabolism = np.mean(metabolism, axis=0)
 
-	# plt.subplot(2, 2, 1)
-	# plt.plot(env.population)
-	# plt.xlabel('Time')
-	# plt.ylabel('Average Population')
-	#
-	# plt.subplot(2, 2, 2)
-	# plt.plot(env.wealth)
-	# plt.xlabel('Time')
-	# plt.ylabel('Average Wealth')
-	#
-	# plt.subplot(2, 2, 3)
-	# plt.plot(env.vision)
-	# plt.xlabel('Time')
-	# plt.ylabel('Average Vision')
-	#
-	# plt.subplot(2, 2, 4)
-	# plt.plot(env.metabolism)
-	# plt.xlabel('Time')
-	# plt.ylabel('Average Metabolism')
-	# plt.show()
+	plt.subplot(2, 2, 1)
+	plt.plot(env.population)
+	plt.xlabel('Time')
+	plt.ylabel('Average Population')
+
+	plt.subplot(2, 2, 2)
+	plt.plot(env.wealth)
+	plt.xlabel('Time')
+	plt.ylabel('Average Wealth')
+
+	plt.subplot(2, 2, 3)
+	plt.plot(env.vision)
+	plt.xlabel('Time')
+	plt.ylabel('Average Vision')
+
+	plt.subplot(2, 2, 4)
+	plt.plot(env.metabolism)
+	plt.xlabel('Time')
+	plt.ylabel('Average Metabolism')
+	plt.show()
