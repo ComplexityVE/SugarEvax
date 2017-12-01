@@ -58,7 +58,7 @@ class Agent:
 
             self.beg_reproduction_age = np.random.uniform(min_beg_child, max_beg_child)
 
-        self.init_sugar = self.sugar
+        self.init_sugar = 0
         self.sex = random.choice(['female','male'])
         if self.sex == 'female':
             self.end_reproduction_age = np.random.uniform(min_end_child_f, max_end_child_f)
@@ -85,7 +85,7 @@ class Agent:
 
     def is_starving(self):
         """Checks if sugar has gone negative."""
-        return self.sugar < 0
+        return self.sugar < self.metabolism
 
     def is_old(self):
         """Checks if lifespan is exceeded."""
