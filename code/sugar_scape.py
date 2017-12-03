@@ -394,11 +394,11 @@ class Sugarscape(Cell2D):
 
 
 if __name__ == '__main__':
-	env = Sugarscape(50, True, False, num_agents=400)
+	env = Sugarscape(50, True, True, num_agents=400)
 	for i in range(800):
 		env.step()
 	env.plot_populations()
-	env = Sugarscape(50, False, False, num_agents=400)
+	env = Sugarscape(50, False, True, num_agents=400)
 	for i in range(800):
 		env.step()
 	env.plot_populations()
