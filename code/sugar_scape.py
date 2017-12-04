@@ -41,7 +41,7 @@ def make_neighbors_locs():
 class Sugarscape(Cell2D):
 	"""Represents an Epstein-Axtell Sugarscape."""
 
-	def __init__(self, n, mating_env=True, **params):
+	def __init__(self, n, taxation, mating_env=True, **params):
 		"""Initializes the attributes.
 
 		n: number of rows and columns
@@ -49,10 +49,13 @@ class Sugarscape(Cell2D):
 		"""
 		self.n = n
 		self.params = params
+		self.total_welfare = 0
+		self.taxation = taxation
 		self.mating_env = mating_env
 
 		# track variables
 		self.agent_count_seq = []
+		self.agent_metabolism_seq = []
 
 		# make the capacity array
 		self.capacity = self.make_capacity()
@@ -66,9 +69,7 @@ class Sugarscape(Cell2D):
 		self.agent_loc_dict = {}
 		self.make_agents()
 
-
 		# Stuff to keep track of for graphing
-		self.population = [len(self.agents)]
 		self.vision = [np.mean([agent.vision for agent in self.agents])]
 		self.wealth = [np.mean([agent.sugar for agent in self.agents])]
 		self.metabolism = [np.mean([agent.metabolism for agent in self.agents])]
@@ -160,11 +161,11 @@ class Sugarscape(Cell2D):
 
 	def step(self):
 		"""Executes one time step."""
-		# loop through the agents in random order
 		replace = self.params.get('replace', False)
+
+		# loop through the agents in random order
 		random_order = np.random.permutation(self.agents)
 		for agent in random_order:
-
 			# mark the current cell unoccupied
 			self.occupied.remove(agent.loc)
 			del self.agent_loc_dict[agent.loc]
@@ -181,8 +182,11 @@ class Sugarscape(Cell2D):
 				self.agent_loc_dict[agent.loc] = agent
 				self.occupied.add(agent.loc)
 
+
 		# update the time series
 		self.agent_count_seq.append(len(self.agents))
+		metabolisms = [agent.metabolism for agent in self.agents]
+		self.agent_metabolism_seq.append(np.mean(metabolisms))
 
 		# grow back some sugar
 		self.grow()
@@ -192,12 +196,20 @@ class Sugarscape(Cell2D):
 			self.mating()
 
 		# update array of values for graphing
-		#TODO: pick one self.population and self.agent_count_seq are literally same thing
-		self.population.append(len(self.agents))
 		self.vision.append(np.mean([agent.vision for agent in self.agents]))
 		self.wealth.append(np.mean([agent.sugar for agent in self.agents]))
 		self.metabolism.append(np.mean([agent.metabolism for agent in self.agents]))
+
+		taxes = [agent.get_tax() for agent in self.agents]
+		self.total_welfare = sum(taxes)
+		self.total_welfare = self.total_welfare - (self.total_welfare*.15)
+
 		return len(self.agents)
+
+	def get_welfare(self):
+		if len(self.agents) == 0:
+			return 0
+		return self.total_welfare / len(self.agents)
 
 	def mating(self):
 		""" mates agents and creates new babies """
@@ -347,7 +359,7 @@ class Sugarscape(Cell2D):
 
 		returns: new Agent
 		"""
-		new_agent = Agent(loc, params,baby)
+		new_agent = Agent(loc, self.taxation, self.mating_env,params,baby)
 		self.agents.append(new_agent)
 		self.agent_loc_dict[new_agent.loc] = new_agent
 		self.occupied.add(new_agent.loc)
@@ -357,7 +369,7 @@ class Sugarscape(Cell2D):
 		"""Generates a new random agent.
 		returns: new Agent
 		"""
-		new_agent = Agent(self.random_loc(), self.params)
+		new_agent = Agent(self.random_loc(), self.taxation, self.mating_env, self.params)
 		self.agents.append(new_agent)
 		self.agent_loc_dict[new_agent.loc] = new_agent
 		self.occupied.add(new_agent.loc)
@@ -373,53 +385,47 @@ class Sugarscape(Cell2D):
 			if loc not in self.occupied:
 				return loc
 
+	def plot_populations(self):
+		plt.plot(self.agent_count_seq)
+
+	def plot_avg_metabolisms(self):
+		plt.plot(self.agent_metabolism_seq)
+
 
 
 if __name__ == '__main__':
-	# populations=[]
-	# wealth = []
-	# vision = []
-	# metabolism = []
-	# for j in range(5):
-	env = Sugarscape(50, num_agents=400)
-	# viewer = SugarscapeViewer(env)
-	# anim = viewer.animate(frames=500)
-
-	# plt.show()
+	env = Sugarscape(50, True, False, num_agents=400)
 	for i in range(800):
-	 	env.step()
-
-	# print(j)
-	# 	populations.append(env.population)
-	# 	wealth.append(env.wealth)
-	# 	vision.append(env.vision)
-	# 	metabolism.append(env.metabolism)
-
-
-	# time = np.arange(801)
-	# #pop_time = np.arange(100)
-	# av_pop = np.mean(populations, axis=0)
-	# av_wealth = np.mean(wealth, axis=0)
-	# av_vision = np.mean(vision, axis=0)
-	# av_metabolism = np.mean(metabolism, axis=0)
-
-	plt.subplot(2, 2, 1)
-	plt.plot(env.population)
-	plt.xlabel('Time')
-	plt.ylabel('Average Population')
-
-	plt.subplot(2, 2, 2)
-	plt.plot(env.wealth)
-	plt.xlabel('Time')
-	plt.ylabel('Average Wealth')
-
-	plt.subplot(2, 2, 3)
-	plt.plot(env.vision)
-	plt.xlabel('Time')
-	plt.ylabel('Average Vision')
-
-	plt.subplot(2, 2, 4)
-	plt.plot(env.metabolism)
-	plt.xlabel('Time')
-	plt.ylabel('Average Metabolism')
+		env.step()
+	env.plot_populations()
+	env = Sugarscape(50, False, False, num_agents=400)
+	for i in range(800):
+		env.step()
+	env.plot_populations()
 	plt.show()
+
+	# env = Sugarscape(50, num_agents=400)
+	#
+	# for i in range(800):
+	#  	env.step()
+	#
+	# plt.subplot(2, 2, 1)
+	# plt.plot(env.population)
+	# plt.xlabel('Time')
+	# plt.ylabel('Average Population')
+	#
+	# plt.subplot(2, 2, 2)
+	# plt.plot(env.wealth)
+	# plt.xlabel('Time')
+	# plt.ylabel('Average Wealth')
+	#
+	# plt.subplot(2, 2, 3)
+	# plt.plot(env.vision)
+	# plt.xlabel('Time')
+	# plt.ylabel('Average Vision')
+	#
+	# plt.subplot(2, 2, 4)
+	# plt.plot(env.metabolism)
+	# plt.xlabel('Time')
+	# plt.ylabel('Average Metabolism')
+	# plt.show()
