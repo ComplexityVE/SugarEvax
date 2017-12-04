@@ -71,8 +71,11 @@ class Sugarscape(Cell2D):
 
 		# Stuff to keep track of for graphing
 		self.vision = [np.mean([agent.vision for agent in self.agents])]
-		self.wealth = [np.mean([agent.sugar for agent in self.agents])]
+		self.curr_mean_wealth = np.mean([agent.sugar for agent in self.agents])
+		self.wealth = [self.curr_mean_wealth]
+		self.low_sugar = sum([1 for agent in self.agents if agent.sugar<=self.curr_mean_wealth])
 		self.metabolism = [np.mean([agent.metabolism for agent in self.agents])]
+		self.get_welfare_brackets()
 
 	def make_capacity(self):
 		"""Makes the capacity array."""
@@ -162,6 +165,7 @@ class Sugarscape(Cell2D):
 	def step(self):
 		"""Executes one time step."""
 		replace = self.params.get('replace', False)
+		self.get_welfare_brackets()
 
 		# loop through the agents in random order
 		random_order = np.random.permutation(self.agents)
@@ -170,6 +174,9 @@ class Sugarscape(Cell2D):
 			self.occupied.remove(agent.loc)
 			del self.agent_loc_dict[agent.loc]
 
+
+			if agent.sugar <= self.curr_mean_wealth:
+				self.low_sugar += 1
 
 			# execute one step
 			agent.step(self)
@@ -197,7 +204,8 @@ class Sugarscape(Cell2D):
 
 		# update array of values for graphing
 		self.vision.append(np.mean([agent.vision for agent in self.agents]))
-		self.wealth.append(np.mean([agent.sugar for agent in self.agents]))
+		self.curr_mean_wealth = np.mean([agent.sugar for agent in self.agents])
+		self.wealth.append(self.curr_mean_wealth)
 		self.metabolism.append(np.mean([agent.metabolism for agent in self.agents]))
 
 		taxes = [agent.get_tax() for agent in self.agents]
@@ -206,10 +214,35 @@ class Sugarscape(Cell2D):
 
 		return len(self.agents)
 
-	def get_welfare(self):
+	def get_welfare(self, agent):
 		if len(self.agents) == 0:
 			return 0
-		return self.total_welfare / len(self.agents)
+		bracket_width = self.curr_mean_wealth / 3
+		if agent.sugar <= self.curr_mean_wealth-bracket_width:
+			return self.bracket1_welfare
+		elif agent.sugar <= self.curr_mean_wealth:
+			return self.bracket2_welfare
+		elif agent.sugar <= self.curr_mean_wealth+bracket_width:
+			return self.bracket3_welfare
+		return 0
+
+	def get_welfare_brackets(self):
+		bracket_width = self.curr_mean_wealth / 3
+		bracket1 = sum([1 for agent in self.agents if agent.sugar<=self.curr_mean_wealth-bracket_width])
+		bracket2 = sum([1 for agent in self.agents if agent.sugar<=self.curr_mean_wealth])
+		bracket3 = sum([1 for agent in self.agents if agent.sugar<=self.curr_mean_wealth+bracket_width])
+		if bracket1 == 0:
+			self.bracket1_welfare = 0
+		else:
+			self.bracket1_welfare = (self.total_welfare*.5)/bracket1
+		if bracket2 == 0:
+			self.bracket2_welfare = 0
+		else:
+			self.bracket2_welfare = (self.total_welfare*.3)/bracket2
+		if bracket3 == 0:
+			self.bracket3_welfare = 0
+		else:
+			self.bracket3_welfare = (self.total_welfare*.2)/bracket3
 
 	def mating(self):
 		""" mates agents and creates new babies """
