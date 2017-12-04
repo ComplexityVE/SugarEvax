@@ -74,7 +74,7 @@ class Agent:
         env: Sugarscape
         """
         self.calculate_tax()
-        self.redistribute_wealth(env.get_welfare())
+        self.redistribute_wealth(env.get_welfare(self))
         self.loc = env.look_around(self.loc, self.vision)
         if self.taxation:
             self.sugar = self.sugar + env.harvest(self.loc) - self.metabolism - self.tax + self.welfare
