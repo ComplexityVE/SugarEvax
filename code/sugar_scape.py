@@ -41,7 +41,7 @@ def make_neighbors_locs():
 class Sugarscape(Cell2D):
 	"""Represents an Epstein-Axtell Sugarscape."""
 
-	def __init__(self, n, taxation, mating_env=True, **params):
+	def __init__(self, n, taxation, mating_env=True, redistribution=False, **params):
 		"""Initializes the attributes.
 
 		n: number of rows and columns
@@ -52,6 +52,7 @@ class Sugarscape(Cell2D):
 		self.total_welfare = 0
 		self.taxation = taxation
 		self.mating_env = mating_env
+		self.redistribution = redistribution
 
 		# track variables
 		self.agent_count_seq = []
@@ -165,7 +166,8 @@ class Sugarscape(Cell2D):
 	def step(self):
 		"""Executes one time step."""
 		replace = self.params.get('replace', False)
-		self.get_welfare_brackets()
+		if self.redistribution:
+			self.get_welfare_brackets()
 
 		# loop through the agents in random order
 		random_order = np.random.permutation(self.agents)
@@ -217,14 +219,17 @@ class Sugarscape(Cell2D):
 	def get_welfare(self, agent):
 		if len(self.agents) == 0:
 			return 0
-		bracket_width = self.curr_mean_wealth / 3
-		if agent.sugar <= self.curr_mean_wealth-bracket_width:
-			return self.bracket1_welfare
-		elif agent.sugar <= self.curr_mean_wealth:
-			return self.bracket2_welfare
-		elif agent.sugar <= self.curr_mean_wealth+bracket_width:
-			return self.bracket3_welfare
-		return 0
+		if self.redistribution:
+			bracket_width = self.curr_mean_wealth / 3
+			if agent.sugar <= self.curr_mean_wealth-bracket_width:
+				return self.bracket1_welfare
+			elif agent.sugar <= self.curr_mean_wealth:
+				return self.bracket2_welfare
+			elif agent.sugar <= self.curr_mean_wealth+bracket_width:
+				return self.bracket3_welfare
+			return 0
+		else:
+			return self.total_welfare / len(self.agents)
 
 	def get_welfare_brackets(self):
 		bracket_width = self.curr_mean_wealth / 3
@@ -418,8 +423,10 @@ class Sugarscape(Cell2D):
 			if loc not in self.occupied:
 				return loc
 
-	def plot_populations(self):
-		plt.plot(self.agent_count_seq)
+	def plot_populations(self, my_label):
+		plt.xlabel('Time')
+		plt.ylabel('Average Population')
+		plt.plot(self.agent_count_seq, label=my_label)
 
 	def plot_avg_metabolisms(self):
 		plt.plot(self.agent_metabolism_seq)
@@ -427,14 +434,15 @@ class Sugarscape(Cell2D):
 
 
 if __name__ == '__main__':
-	env = Sugarscape(50, True, True, num_agents=400)
+	env = Sugarscape(50, True, True, True, num_agents=400)
 	for i in range(800):
 		env.step()
-	env.plot_populations()
-	env = Sugarscape(50, False, True, num_agents=400)
+	env.plot_populations("Taxation")
+	env = Sugarscape(50, False, True, True, num_agents=400)
 	for i in range(800):
 		env.step()
-	env.plot_populations()
+	env.plot_populations("No Taxation")
+	plt.title("Population with Redistribution of Welfare")
 	plt.show()
 
 	# env = Sugarscape(50, num_agents=400)
