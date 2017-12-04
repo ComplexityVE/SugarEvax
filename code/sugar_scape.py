@@ -427,6 +427,7 @@ class Sugarscape(Cell2D):
 		plt.xlabel('Time')
 		plt.ylabel('Average Population')
 		plt.plot(self.agent_count_seq, label=my_label)
+		plt.legend()
 
 	def plot_avg_metabolisms(self):
 		plt.plot(self.agent_metabolism_seq)
@@ -434,15 +435,15 @@ class Sugarscape(Cell2D):
 
 
 if __name__ == '__main__':
-	env = Sugarscape(50, True, True, True, num_agents=400)
+	env = Sugarscape(50, True, False, True, num_agents=400)
 	for i in range(800):
 		env.step()
 	env.plot_populations("Taxation")
-	env = Sugarscape(50, False, True, True, num_agents=400)
+	env = Sugarscape(50, False, False, True, num_agents=400)
 	for i in range(800):
 		env.step()
 	env.plot_populations("No Taxation")
-	plt.title("Population with Redistribution of Welfare")
+	plt.title("Population with No Evolution")
 	plt.show()
 
 	# env = Sugarscape(50, num_agents=400)
