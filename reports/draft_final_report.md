@@ -2,7 +2,7 @@
 ### By Vicky McDermott and Emily Lepert
 
 ## Abstract
-We replicated the work done in the paper by implementing taxation and evolution systems in a Sugarscape model. With the same parameters used in the paper and a few tweaks to our model we were able to see results that were qualitatively similar to the ones in the paper. We then extended on the work they had done by experimenting with different welfare and taxation brackets. We found that the population as a whole does just about the same or even better when different percentages of it are given to different wealth brackets as opposed to when the welfare sugar is divided equally.
+We replicated the work done by Bäck, Vermeulen, and Eiben([1](#Bibliography)) by implementing taxation and evolution systems in a Sugarscape model. With the same parameters used in the paper and a few tweaks to our model we were able to see results that were qualitatively similar to the ones in the paper. We then extended on the work they had done by experimenting with different welfare and taxation brackets. We found that the population as a whole does just about the same or even better when different percentages of it are given to different wealth brackets as opposed to when the welfare sugar is divided equally.
 _________________________________________________________
 
 ## Replication
