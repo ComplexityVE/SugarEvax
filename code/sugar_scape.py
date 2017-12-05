@@ -435,15 +435,44 @@ class Sugarscape(Cell2D):
 
 
 if __name__ == '__main__':
-	env = Sugarscape(50, True, False, False, num_agents=400)
-	for i in range(800):
-		env.step()
-	env.plot_populations("Taxation")
+	env = Sugarscape(50, False, True, False, num_agents=400)
+	tot_pop = []
+	plt.subplot(2, 1, 1)
+	for j in range(2):
+		print(j)
+		for i in range(800):
+			env.step()
+		tot_pop.append(env.agent_count_seq)
+	#env.plot_populations("Evolution")
+	av_pop_ev = np.mean(tot_pop, axis=0)
+	plt.plot(av_pop_ev)
+	plt.xlabel('Time')
+	plt.ylabel('Average Population')
+	plt.title('Population with evolution and no tax')
+
+	plt.subplot(2, 1, 2)
+	env = Sugarscape(50, True, True, False, num_agents=400)
+	tot_pop = []
+	for j in range(2):
+		print(j)
+		for i in range(800):
+			env.step()
+		tot_pop.append(env.agent_count_seq)
+	#env.plot_populations("Evolution")
+	av_pop_both = np.mean(tot_pop, axis=0)
+	plt.plot(av_pop_both, label="Population tax")
+	plt.plot(av_pop_ev, label="Population no tax")
+	plt.legend()
+	plt.xlabel('Time')
+	plt.ylabel('Average Population')
+	plt.title('Population with evolution')
+	'''
 	env = Sugarscape(50, False, False, False, num_agents=400)
 	for i in range(800):
 		env.step()
 	env.plot_populations("No Taxation")
 	plt.title("Population with No Evolution")
+	'''
 	plt.show()
 
 	# env = Sugarscape(50, num_agents=400)
