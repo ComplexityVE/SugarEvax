@@ -57,7 +57,7 @@ We then added up the total taxation in the environment and gave each agent welfa
 
 | Figure 2a | Figure 2b |
 | ---- | ---- |
-| *caption* | *caption* |
+| *Our graph of population over time for a system with taxation and welfare spread out equally between agents.* | *Original graph of population over time for a system with taxation.* |
 
 Because they did not fully specify how the welfare was awarded in the paper, we decided to try subtracting a percentage of the sugar from the total taxation collected before dividing it up to give out as welfare. We decided to subtract 15% of the total welfare. In the application of our model, we can think of this as the proportion of the taxes that the government might take. This seemed to produce results that were more similar to the results from the original paper as can be seen below. In both our model and the paper's model the average population of agents evens out at about 310 agents when there is taxation.
 
