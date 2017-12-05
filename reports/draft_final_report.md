@@ -28,7 +28,7 @@ Every time step, an agent moves by looking at the cells around it with the maxim
 
 Agents die when the amount of sugar they have is less than their metabolism or when their death age is reached.
 
-To move all of the agents, we shuffle the order of the agents and move them one by one. Below is a comparision of the result of our simulation to the paper's.
+To move all of the agents, we shuffle the order of the agents and move them one by one. Below is a comparison of the result of our simulation to the paper's.
 
 ### Taxation
 Next, we implemented a taxation system on the agents in our model following the same rules and initial conditions specified in the paper. We took taxes from the agents proportional to their wealth at these rates:
