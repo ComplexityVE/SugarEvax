@@ -69,7 +69,7 @@ We add reproduction to the model. After an agent moves, it finds all of it's nei
 
 An agent is able to mate if it meets these requirements:
 - It is of child bearing age
-- It's current sugar is greater than or equal to the amount of sugar it started with
+- Its current sugar is greater than or equal to the amount of sugar it started with
 
 Two agents mate if they are of opposite sexes. The b_agent they produce is born on a neighboring cell if there is an empty one available. If not, then no new b_agent is created. The b_agent receives sugar from both parents. The amount of sugar each parent donates is equivalent to half of the amount of sugar the parents's initial sugar.
 
