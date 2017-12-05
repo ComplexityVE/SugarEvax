@@ -30,6 +30,15 @@ Agents die when the amount of sugar they have is less than their metabolism or w
 
 To move all of the agents, we shuffle the order of the agents and move them one by one. Below is a comparison of the result of our simulation to the paper's.
 
+##### Figure 1a (left) and 1b (right)
+
+<img width="400" src="https://raw.githubusercontent.com/ComplexityVE/SugarEvax/master/images/modelempty.png"> <img width="400" src="https://raw.githubusercontent.com/ComplexityVE/SugarEvax/master/images/taxation1.png">
+| Figure 1a | Figure 1b |
+| ---- | ---- |
+| *Graph of population without evolution or tax over time. Population starts out at 400 agents and drops to approximately 230 in 100 time steps.* | *Bäck, Vermeulen, and Eiben([1](#Bibliography))'s graph of population over time with no evolution and with and without taxation. Population without tax starts out at 400 agents and drops to approximately 240 in 100 time steps.* |
+
+Figure 1a matches very closely the behavior of Figure 1b's "no-tax" line quantitatively. It makes sense for the population to suddenly drop within the first 100 time steps, because there are too many agents for the space and resources provided. The population falls until there are enough resources to support all agents.
+
 ### Taxation
 Next, we implemented a taxation system on the agents in our model following the same rules and initial conditions specified in the paper. We took taxes from the agents proportional to their wealth at these rates:
 
@@ -42,7 +51,7 @@ Next, we implemented a taxation system on the agents in our model following the 
 
 We then added up the total taxation in the environment and gave each agent welfare equal to the total amount of sugar collected from taxation divided by the total number of agents. We found that doing this produced results that were qualitatively similar to the paper but it seemed as if the taxation system in the paper was less generous because larger populations of our agents were surviving. In the sugarscape model with no taxation the population dips down and evens out at an average population of about 225. With taxation, the average population of agents evens out at about 375 agents whereas the average population of agents evens out at about 310 agents in the paper's model with taxation. This can be seen in the graph below.
 
-Figures 2a(left) and 2b(right)
+##### Figures 2a(left) and 2b(right)
 
 <img width="400" src="https://raw.githubusercontent.com/ComplexityVE/SugarEvax/master/images/noevol_noredist_govttakesnone.png"> <img width="400" src="https://raw.githubusercontent.com/ComplexityVE/SugarEvax/master/images/taxation1.png">
 
@@ -52,7 +61,7 @@ Figures 2a(left) and 2b(right)
 
 Because they did not fully specify how the welfare was awarded in the paper, we decided to try subtracting a percentage of the sugar from the total taxation collected before dividing it up to give out as welfare. We decided to subtract 15% of the total welfare. In the application of our model, we can think of this as the proportion of the taxes that the government might take. This seemed to produce results that were more similar to the results from the original paper as can be seen below. In both our model and the paper's model the average population of agents evens out at about 310 agents when there is taxation.
 
-Figures 3a(left) and 3b(right)
+##### Figures 3a(left) and 3b(right)
 
 <img width="400" src="https://raw.githubusercontent.com/ComplexityVE/SugarEvax/master/images/noevol_noredist.png">  <img width="400" src="https://raw.githubusercontent.com/ComplexityVE/SugarEvax/master/images/taxation1.png">
 
@@ -88,16 +97,26 @@ Evolution is added to the model through the values of the characteristics of the
 
 Below is the result of our implementation and the paper's implementation:
 
+##### Figures 4a (left) and 4b (right)
+
 <img width="400" src="https://raw.githubusercontent.com/ComplexityVE/SugarEvax/master/images/modelEvPop.png"> <img width="400" src="https://raw.githubusercontent.com/ComplexityVE/SugarEvax/master/images/paperEv4.png"> 
 
 | Figure 4a | Figure 4b |
 | ---- | ---- |
-| *caption* | *caption* |
+| *Graph of population with evolution and no tax over time. Population oscillates around 400 agents.* | *Bäck, Vermeulen, and Eiben([1](#Bibliography))'s graph of population over time with evolution and with and without taxation. Population without tax oscillates then stabilizes to 500.* |
+
+Figure 4a 
 
 ### Taxation and Evolution
 To combine taxation and evolution into a single model we use the evolution characteristics with the taxation, sex, evolution rules. Below is a comparison of the result of our implementation and the paper's:
 
+##### Figures 5a (left) and 5b (right)
+
 <img width="450" src="https://raw.githubusercontent.com/ComplexityVE/SugarEvax/master/images/modelEvTaxPop.png"> <img width="450" src="https://raw.githubusercontent.com/ComplexityVE/SugarEvax/master/images/paperEv4.png"> 
+
+| Figure 5a | Figure 5b |
+| ---- | ---- |
+| *Graph of population with evolution and with and without tax over time. Population without tax oscillates around 400 agents. Population with tax climbs to 1500 agents in 100 time steps.* | *Bäck, Vermeulen, and Eiben([1](#Bibliography))'s graph of population over time with evolution and with and without taxation. Population without tax oscillates then stabilizes to 500. Population with tax and evolution climbs to approximately 2250 agents in 200 time steps.* |
 
 ## Extension
 
