@@ -212,7 +212,7 @@ class Sugarscape(Cell2D):
 
 		taxes = [agent.get_tax() for agent in self.agents]
 		self.total_welfare = sum(taxes)
-		self.total_welfare = self.total_welfare #- (self.total_welfare*.15)
+		self.total_welfare = self.total_welfare - (self.total_welfare*.15)
 
 		return len(self.agents)
 
