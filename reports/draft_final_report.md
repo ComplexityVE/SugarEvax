@@ -39,15 +39,20 @@ To move all of the agents, we shuffle the order of the agents and move them one 
 
 ### Taxation
 Next, we implemented a taxation system on the agents in our model following the same rules specified in the paper. We took taxes from the agents proportional to their wealth at these rates:
+
 | Wealth Between | Base Amount | Additional Taxation |
 | ------- | ------- | ------- |
 | 0 - 5 | 0 | 30% |
 | 5 - 12 | 1.5 | 40% |
 | 12 - 20 | 4.8 | 50% |
 | 20 - \infty | 10 | 60% |
+
 We then added up the total taxation in the environment and gave each agent welfare equal to the total amount of sugar collected from taxation divided by the total number of agents. We found that doing this produced results that were qualitatively similar to the paper but it seemed as if the taxation system in the paper was less generous because larger populations of our agents were surviving. This can be seen in the graph below.
+
 <img width="280" src="https://raw.githubusercontent.com/ComplexityVE/SugarEvax/master/images/noevol_noredist_govttakesnone.png">
+
 Because they did not fully specify how the welfare was awarded in the paper, we decided to try subtracting a percentage of the sugar from the total taxation collected before dividing it up to give out as welfare. This seemed to produce results that were more similar to the results from the original paper as can be seen below.
+
 <img width="280" src="https://raw.githubusercontent.com/ComplexityVE/SugarEvax/master/images/noevol_noredist.png">
 
 
