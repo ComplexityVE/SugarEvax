@@ -212,7 +212,7 @@ class Sugarscape(Cell2D):
 
 		taxes = [agent.get_tax() for agent in self.agents]
 		self.total_welfare = sum(taxes)
-		self.total_welfare = self.total_welfare #- (self.total_welfare*.15)
+		self.total_welfare = self.total_welfare - (self.total_welfare*.15)
 
 		return len(self.agents)
 
@@ -234,8 +234,8 @@ class Sugarscape(Cell2D):
 	def get_welfare_brackets(self):
 		bracket_width = self.curr_mean_wealth / 3
 		bracket1 = sum([1 for agent in self.agents if agent.sugar<=self.curr_mean_wealth-bracket_width])
-		bracket2 = sum([1 for agent in self.agents if agent.sugar<=self.curr_mean_wealth])
-		bracket3 = sum([1 for agent in self.agents if agent.sugar<=self.curr_mean_wealth+bracket_width])
+		bracket2 = sum([1 for agent in self.agents if agent.sugar<=self.curr_mean_wealth and agent.sugar>self.curr_mean_wealth-bracket_width])
+		bracket3 = sum([1 for agent in self.agents if agent.sugar<=self.curr_mean_wealth+bracket_width and agent.sugar>self.curr_mean_wealth])
 		if bracket1 == 0:
 			self.bracket1_welfare = 0
 		else:
@@ -435,39 +435,11 @@ class Sugarscape(Cell2D):
 
 
 if __name__ == '__main__':
-	env = Sugarscape(50, False, True, False, num_agents=400)
-	tot_pop = []
-	plt.subplot(2, 1, 1)
-	for j in range(2):
-		print(j)
-		for i in range(800):
-			env.step()
-		tot_pop.append(env.agent_count_seq)
-	#env.plot_populations("Evolution")
-	av_pop_ev = np.mean(tot_pop, axis=0)
-	plt.plot(av_pop_ev)
-	plt.xlabel('Time')
-	plt.ylabel('Average Population')
-	plt.title('Population with evolution and no tax')
-
-	plt.subplot(2, 1, 2)
-	env = Sugarscape(50, True, True, False, num_agents=400)
-	tot_pop = []
-	for j in range(2):
-		print(j)
-		for i in range(800):
-			env.step()
-		tot_pop.append(env.agent_count_seq)
-	#env.plot_populations("Evolution")
-	av_pop_both = np.mean(tot_pop, axis=0)
-	plt.plot(av_pop_both, label="Population tax")
-	plt.plot(av_pop_ev, label="Population no tax")
-	plt.legend()
-	plt.xlabel('Time')
-	plt.ylabel('Average Population')
-	plt.title('Population with evolution')
-	'''
-	env = Sugarscape(50, False, False, False, num_agents=400)
+	env = Sugarscape(50, True, False, True, num_agents=400)
+	for i in range(800):
+		env.step()
+	env.plot_populations("Taxation")
+	env = Sugarscape(50, False, False, True, num_agents=400)
 	for i in range(800):
 		env.step()
 	env.plot_populations("No Taxation")
