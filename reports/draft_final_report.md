@@ -58,7 +58,7 @@ We then added up the total taxation in the environment and gave each agent welfa
 
 | Figure 2a | Figure 2b |
 | ---- | ---- |
-| *Our graph of population over time for a system with taxation and welfare spread out equally between agents.* | *Original graph of population over time for a system with taxation.* |
+| *Our graph of population over time for a system with taxation.* | *Original graph of population over time for a system with taxation.* |
 
 Because they did not fully specify how the welfare was awarded in the paper, we decided to try subtracting a percentage of the sugar from the total taxation collected before dividing it up to give out as welfare. We decided to subtract 15% of the total welfare. In the application of our model, we can think of this as the proportion of the taxes that the government might take. This seemed to produce results that were more similar to the results from the original paper as can be seen below. In both our model and the paper's model the average population of agents evens out at about 310 agents when there is taxation.
 
@@ -68,7 +68,7 @@ Because they did not fully specify how the welfare was awarded in the paper, we 
 
 | Figure 3a | Figure 3b |
 | ---- | ---- |
-| *caption* | *caption* |
+| *Our graph of population over time for a system with taxation and some welfare given to government.* | *Original graph of population over time for a system with taxation.* |
 
 ### Sex and Evolution
 To implement sex and evolution in our model, we change the values of some characteristics and include more. Below is the table with the updated values:
@@ -100,7 +100,7 @@ Below is the result of our implementation and the paper's implementation:
 
 ##### Figures 4a (left) and 4b (right)
 
-<img width="400" src="https://raw.githubusercontent.com/ComplexityVE/SugarEvax/master/images/modelEvPop.png"> <img width="400" src="https://raw.githubusercontent.com/ComplexityVE/SugarEvax/master/images/paperEv4.png"> 
+<img width="400" src="https://raw.githubusercontent.com/ComplexityVE/SugarEvax/master/images/modelEvPop.png"> <img width="400" src="https://raw.githubusercontent.com/ComplexityVE/SugarEvax/master/images/paperEv4.png">
 
 | Figure 4a | Figure 4b |
 | ---- | ---- |
@@ -113,7 +113,7 @@ To combine taxation and evolution into a single model we use the evolution chara
 
 ##### Figures 5a (left) and 5b (right)
 
-<img width="400" src="https://raw.githubusercontent.com/ComplexityVE/SugarEvax/master/images/modelEvTaxPop.png"> <img width="400" src="https://raw.githubusercontent.com/ComplexityVE/SugarEvax/master/images/paperEv4.png"> 
+<img width="400" src="https://raw.githubusercontent.com/ComplexityVE/SugarEvax/master/images/modelEvTaxPop.png"> <img width="400" src="https://raw.githubusercontent.com/ComplexityVE/SugarEvax/master/images/paperEv4.png">
 
 | Figure 5a | Figure 5b |
 | ---- | ---- |
@@ -129,19 +129,25 @@ For our extension, one thing we decided to explore was adding different welfare 
 
 <img width="500" src="https://raw.githubusercontent.com/ComplexityVE/SugarEvax/master/images/wealth_redistribution_correct_label.png">
 
-*Figure 6: caption*
+| Figure 6a |
+| ---- |
+| *Our graph of population over time for a system with evolution, taxation, and one welfare bracket.* |
 
 Next we made our welfare redistribution system slightly more complex by creating 3 different brackets instead of simply dividing the welfare amongst the agents who had less than the mean amount of sugar. We created the brackets by dividing the mean wealth by 3 and adding that number to the mean wealth to get the upper limit of the third bracket and subtracting that number from the mean wealth to get the upper limit of the first bracket. We then gave agents who fell into the first bracket 50% of the welfare to divide evenly amongst themselves. Similarly we gave agents who fell into the second bracket 30% of the welfare to divide evenly amongst themselves and agents who fell into the third bracket the remaining 20% of the welfare to divide evenly amongst themselves. Agents with more sugar than the upper limit of the third bracket did not get any welfare. With this system in place, we ran our model with taxation and no evolution and got the following graph. With our complex system the average population still steadied out at about 310 agents or maybe a bit higher than that.
 
 <img width="500" src="https://raw.githubusercontent.com/ComplexityVE/SugarEvax/master/images/noevol_withredist.png">
 
-*Figure 7: caption*
+| Figure 7a |
+| ---- |
+| *Our graph of population over time for a system with taxation and three welfare brackets but no evolution.* |
 
 We ran the same model with both taxation and evolution implemented and got the following graph. With this system in place, the average population spikes up to be be as much as 1800 agents at some times. That said, the average seems to oscillate around about 1500 agents, about 100 agents higher than the average was when welfare was split up equally between all agents.
 
 <img width="500" src="https://raw.githubusercontent.com/ComplexityVE/SugarEvax/master/images/wealth_redistribution_3brackets_labels.png">
 
-*Figure 8: caption*
+| Figure 8a |
+| ---- |
+| *Our graph of population over time for a system with evolution, taxation, and three welfare brackets.* |
 
 We suspect that the reason that our bracketed welfare redistribution system did not improve the survival rate by much (measured by average population over time) was because we were already taking more from the agents with more sugar in our bracketed taxation system. Taking more and giving less most likely meant that the agents with a medium amount of sugar were not able to survive in our model. This explains the oscillation we are seeing in our graphs and why the welfare redistribution did not have as much of an effect as we might have liked.
 
@@ -150,4 +156,3 @@ We suspect that the reason that our bracketed welfare redistribution system did 
 Bäck, Vermeulen, Eiben, S.-H Cheng, P.Wang, Eds., Proceedings of the Second International Workshop on Computational Intelligence in Economics and Financ. JCIS Press, 2002, pp. 1151-1156
 
 This paper implements a SugarScape where taxation on the society and procreation are present. Taxation is implemented so that at each time step, each agent gives up a percentage of their wealth, and the total wealth is redistributed evenly across the population. The percentage taken depends on the wealth of the agent. Evolution is implemented by allowing the agents to reproduce. Each newborn agent gets half of the starting wealth of the father and mother. Its metabolism, vision, age of death, and child bearing age are all influenced by its parents with "Mendelian Rules." The paper finds that with evolution and a taxation system, the sytem has a very high agent population, but lower average wealth, while no taxation or evolution has a low population, but high average wealth. This intuitively makes sense.
-
