@@ -42,13 +42,11 @@ Next, we implemented a taxation system on the agents in our model following the 
 
 We then added up the total taxation in the environment and gave each agent welfare equal to the total amount of sugar collected from taxation divided by the total number of agents. We found that doing this produced results that were qualitatively similar to the paper but it seemed as if the taxation system in the paper was less generous because larger populations of our agents were surviving. In the sugarscape model with no taxation the population dips down and evens out at an average population of about 225. With taxation, the average population of agents evens out at about 375 agents whereas the average population of agents evens out at about 310 agents in the paper's model with taxation. This can be seen in the graph below.
 
-Figures 2a(left) and 2b(right)
-
 <img width="400" src="https://raw.githubusercontent.com/ComplexityVE/SugarEvax/master/images/noevol_noredist_govttakesnone.png"> <img width="400" src="https://raw.githubusercontent.com/ComplexityVE/SugarEvax/master/images/taxation1.png">
 
 | Figure 1a | Figure 1b |
 | ---- | ---- |
-| *caption* | *caption* |
+| *Our graph of population over time for a system with taxation and welfare spread out equally between agents.* | *Original graph of population over time for a system with taxation.* |
 
 Because they did not fully specify how the welfare was awarded in the paper, we decided to try subtracting a percentage of the sugar from the total taxation collected before dividing it up to give out as welfare. We decided to subtract 15% of the total welfare. In the application of our model, we can think of this as the proportion of the taxes that the government might take. This seemed to produce results that were more similar to the results from the original paper as can be seen below. In both our model and the paper's model the average population of agents evens out at about 310 agents when there is taxation.
 
