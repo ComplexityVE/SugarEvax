@@ -9,6 +9,7 @@ _________________________________________________________
 
 ### Sugarscape
 We replicate the first experiment done by Bäck, Vermeulen, and Eiben([1](#Bibliography)). We simulate agents living in Sugarscape with no taxation or evolution system present. The characteristics of the world are as follows:
+
 | Characteristic | Value | Characteristic | Value |
 | ----- | ----| ---- | ----- |
 | Height of the world | 50 | Minimum metabolism | 1 |
