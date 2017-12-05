@@ -76,10 +76,12 @@ Two agents mate if they are of opposite sexes. The b_agent they produce is born 
 Evolution is added to the model through the values of the characteristics of the b_agents. The gender of the b_agent is randomly chosen. The b_agent's metabolism, vision, age of death, and child bearing age are set by randomly choosing each one from the parent's characteristics. For example, if parent 1 had m,v,d,c as it's genetic makeup, and parent 2 had M,V,D,C, then the b_agent has a 50% chance of getting either values. There are 16 possibilities: (m,V,D,C), (m,v,D,c), (M,V,d,C), etc...
 
 Below is the result of our implementation and the paper's implementation:
+
 <img width="280" src="https://raw.githubusercontent.com/ComplexityVE/SugarEvax/master/images/modelEvPop.png"> <img width="280" src="https://raw.githubusercontent.com/ComplexityVE/SugarEvax/master/images/paperEv4.png"> 
 
 ### Taxation and Evolution
 To combine taxation and evolution into a single model we use the evolution characteristics with the taxation, sex, evolution rules. Below is a comparison of the result of our implementation and the paper's:
+
 <img width="280" src="https://raw.githubusercontent.com/ComplexityVE/SugarEvax/master/images/modelEvTaxPop.png"> <img width="280" src="https://raw.githubusercontent.com/ComplexityVE/SugarEvax/master/images/paperEv4.png"> 
 
 ## Extension
