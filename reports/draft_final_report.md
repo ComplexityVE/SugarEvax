@@ -113,11 +113,7 @@ To combine taxation and evolution into a single model we use the evolution chara
 
 ##### Figures 5a (left) and 5b (right)
 
-<<<<<<< HEAD
-<img width="450" src="https://raw.githubusercontent.com/ComplexityVE/SugarEvax/master/images/modelEvTaxPop.png"> <img width="450" src="https://raw.githubusercontent.com/ComplexityVE/SugarEvax/master/images/paperEv4.png">
-=======
 <img width="400" src="https://raw.githubusercontent.com/ComplexityVE/SugarEvax/master/images/modelEvTaxPop.png"> <img width="400" src="https://raw.githubusercontent.com/ComplexityVE/SugarEvax/master/images/paperEv4.png">
->>>>>>> 9eec11b292e22062b59662da5b5e029b68bea071
 
 | Figure 5a | Figure 5b |
 | ---- | ---- |
@@ -148,6 +144,7 @@ Next we made our welfare redistribution system slightly more complex by creating
 We ran the same model with both taxation and evolution implemented and got the following graph. With this system in place, the average population spikes up to be be as much as 1800 agents at some times. That said, the average seems to oscillate around about 1500 agents, about 100 agents higher than the average was when welfare was split up equally between all agents.
 
 <img width="500" src="https://raw.githubusercontent.com/ComplexityVE/SugarEvax/master/images/wealth_redistribution_3brackets_labels.png">
+
 | Figure 8a |
 | ---- |
 | *Our graph of population over time for a system with evolution, taxation, and three welfare brackets.* |
