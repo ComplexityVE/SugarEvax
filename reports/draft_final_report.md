@@ -127,7 +127,7 @@ Figure 5 shows the qualitative similarity between the population that is evolvin
 For our extension, one thing we decided to explore was adding different welfare brackets. Instead of simply giving an equal amount of welfare to all agents regardless of how much sugar they had, we instead decided to split the welfare evenly among agents who had less than the mean amount of sugar that agents had. Running this model with both evolution and taxation produced the following graph. It is interesting to note that with this system of splitting the welfare only amongst the poorer agents, the population of agents does not do as well as it did with purely taxation and evolution. It now seems to oscillate and winds up steadying out around an oscillation of 400 agents while before when we distributed welfare equally among the agents the population climbed to 1400 agents.
 
 
-<img width="500" src="https://raw.githubusercontent.com/ComplexityVE/SugarEvax/master/images/wealth_redistribution_labels.png">
+<img width="500" src="https://raw.githubusercontent.com/ComplexityVE/SugarEvax/master/images/wealth_redistribution_correct_label.png">
 
 *Figure 6: caption*
 
