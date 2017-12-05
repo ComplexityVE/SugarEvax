@@ -45,7 +45,7 @@ Next, we implemented a taxation system on the agents in our model following the 
 | 0 - 5 | 0 | 30% |
 | 5 - 12 | 1.5 | 40% |
 | 12 - 20 | 4.8 | 50% |
-| 20 - \infty | 10 | 60% |
+| 20 - &infin; | 10 | 60% |
 
 We then added up the total taxation in the environment and gave each agent welfare equal to the total amount of sugar collected from taxation divided by the total number of agents. We found that doing this produced results that were qualitatively similar to the paper but it seemed as if the taxation system in the paper was less generous because larger populations of our agents were surviving. This can be seen in the graph below.
 
