@@ -472,3 +472,4 @@ if __name__ == '__main__':
 	# plt.xlabel('Time')
 	# plt.ylabel('Average Metabolism')
 	# plt.show()
+	'''
