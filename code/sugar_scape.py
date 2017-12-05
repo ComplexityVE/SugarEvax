@@ -234,8 +234,8 @@ class Sugarscape(Cell2D):
 	def get_welfare_brackets(self):
 		bracket_width = self.curr_mean_wealth / 3
 		bracket1 = sum([1 for agent in self.agents if agent.sugar<=self.curr_mean_wealth-bracket_width])
-		bracket2 = sum([1 for agent in self.agents if agent.sugar<=self.curr_mean_wealth])
-		bracket3 = sum([1 for agent in self.agents if agent.sugar<=self.curr_mean_wealth+bracket_width])
+		bracket2 = sum([1 for agent in self.agents if agent.sugar<=self.curr_mean_wealth and agent.sugar>self.curr_mean_wealth-bracket_width])
+		bracket3 = sum([1 for agent in self.agents if agent.sugar<=self.curr_mean_wealth+bracket_width and agent.sugar>self.curr_mean_wealth])
 		if bracket1 == 0:
 			self.bracket1_welfare = 0
 		else:
@@ -435,11 +435,11 @@ class Sugarscape(Cell2D):
 
 
 if __name__ == '__main__':
-	env = Sugarscape(50, True, False, False, num_agents=400)
+	env = Sugarscape(50, True, False, True, num_agents=400)
 	for i in range(800):
 		env.step()
 	env.plot_populations("Taxation")
-	env = Sugarscape(50, False, False, False, num_agents=400)
+	env = Sugarscape(50, False, False, True, num_agents=400)
 	for i in range(800):
 		env.step()
 	env.plot_populations("No Taxation")

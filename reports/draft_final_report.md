@@ -65,7 +65,7 @@ To implement sex and evolution in our model, we change the values of some charac
 | Maximum begin child bearing age | 15 | Minimum end child bearing age female | 40 |
 | Maximum end child bearing age male | 50 |
 
-We add reproduction to the model. After an agent moves, it finds all of it's neighbors that are able to mate, mates with them, and produce a new agent (b_agent). 
+We add reproduction to the model. After an agent moves, it finds all of it's neighbors that are able to mate, mates with them, and produce a new agent (b_agent).
 
 An agent is able to mate if it meets these requirements:
 - It is of child bearing age
@@ -84,15 +84,15 @@ For our extension, one thing we decided to explore was adding different welfare 
 
 <img width="280" src="https://raw.githubusercontent.com/ComplexityVE/SugarEvax/master/images/wealth_redistribution.png">
 
-Next we made our welfare redistribution system slightly more complex by creating 3 different brackets instead of simply dividing the welfare amongst the agents who had less than the mean amount of sugar. We created the brackets by dividing the mean wealth by 3 and adding that number to the mean wealth to get the upper limit of the third bracket and subtracting that number from the mean wealth to get the upper limit of the first bracket. We then gave agents who fell into the first bracket 50% of the welfare to divide evenly amongst themselves. Similarly we gave agents who fell into the second bracket 30% of the welfare to divide evenly amongst themselves and agents who fell into the third bracket the remaining 20% of the welfare to divide evenly amongst themselves. Agents with more sugar than the upper limit of the third bracket did not get any welfare. With this system in place, we ran our model with taxation and no evolution and got the following graph. It turned out that even with our complex welfare system, the average population dipped to about 275 agents as compared to when it had only dipped to 310 when we were splitting the welfare equally among all the agents.
+Next we made our welfare redistribution system slightly more complex by creating 3 different brackets instead of simply dividing the welfare amongst the agents who had less than the mean amount of sugar. We created the brackets by dividing the mean wealth by 3 and adding that number to the mean wealth to get the upper limit of the third bracket and subtracting that number from the mean wealth to get the upper limit of the first bracket. We then gave agents who fell into the first bracket 50% of the welfare to divide evenly amongst themselves. Similarly we gave agents who fell into the second bracket 30% of the welfare to divide evenly amongst themselves and agents who fell into the third bracket the remaining 20% of the welfare to divide evenly amongst themselves. Agents with more sugar than the upper limit of the third bracket did not get any welfare. With this system in place, we ran our model with taxation and no evolution and got the following graph. With our complex system the average population still steadied out at about 310 agents or maybe a bit higher than that.
 
 <img width="280" src="https://raw.githubusercontent.com/ComplexityVE/SugarEvax/master/images/noevol_withredist.png">
 
-We ran the same model with both taxation and evolution implemented and got the following graph. Although the average population of agents does spike up to be much higher at some points with this bracketed wealth redistribution system it appears that the average population still oscillates around 1400 (or maybe even a little less), the same number of agents that was produced with the taxation and evolution systems in place and a welfare system where welfare was split up equally between all agents.
+We ran the same model with both taxation and evolution implemented and got the following graph. With this system in place, the average population spikes up to be be as much as 1800 agents at some times. That said, the average seems to oscillate around about 1500 agents, about 100 agents higher than the average was when welfare was split up equally between all agents.
 
 <img width="280" src="https://raw.githubusercontent.com/ComplexityVE/SugarEvax/master/images/wealth_redistribution_3brackets_labels.png">
 
-We suspect that the reason that our bracketed welfare redistribution system did not improve the survival rate (measured by average population over time) was because we were already taking more from the agents with more sugar in our bracketed taxation system. Taking more and giving less most likely meant that the agents with a medium amount of sugar were not able to survive in our model. This explains the oscillation we are seeing in our graphs and why the welfare redistribution did not work as well as we might have liked.
+We suspect that the reason that our bracketed welfare redistribution system did not improve the survival rate by much (measured by average population over time) was because we were already taking more from the agents with more sugar in our bracketed taxation system. Taking more and giving less most likely meant that the agents with a medium amount of sugar were not able to survive in our model. This explains the oscillation we are seeing in our graphs and why the welfare redistribution did not have as much of an effect as we might have liked.
 
 ## Bibliography
 1. sldkjflskdjfs
