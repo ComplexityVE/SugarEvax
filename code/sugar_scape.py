@@ -212,7 +212,7 @@ class Sugarscape(Cell2D):
 
 		taxes = [agent.get_tax() for agent in self.agents]
 		self.total_welfare = sum(taxes)
-		self.total_welfare = self.total_welfare - (self.total_welfare*.15)
+		self.total_welfare = self.total_welfare #- (self.total_welfare*.15)
 
 		return len(self.agents)
 
@@ -435,11 +435,11 @@ class Sugarscape(Cell2D):
 
 
 if __name__ == '__main__':
-	env = Sugarscape(50, True, False, True, num_agents=400)
+	env = Sugarscape(50, True, False, False, num_agents=400)
 	for i in range(800):
 		env.step()
 	env.plot_populations("Taxation")
-	env = Sugarscape(50, False, False, True, num_agents=400)
+	env = Sugarscape(50, False, False, False, num_agents=400)
 	for i in range(800):
 		env.step()
 	env.plot_populations("No Taxation")
