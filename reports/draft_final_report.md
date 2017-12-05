@@ -46,7 +46,7 @@ Figures 2a(left) and 2b(right)
 
 <img width="400" src="https://raw.githubusercontent.com/ComplexityVE/SugarEvax/master/images/noevol_noredist_govttakesnone.png"> <img width="400" src="https://raw.githubusercontent.com/ComplexityVE/SugarEvax/master/images/taxation1.png">
 
-| Figure 1a | Figure 1b |
+| Figure 2a | Figure 2b |
 | ---- | ---- |
 | *caption* | *caption* |
 
@@ -56,7 +56,7 @@ Figures 3a(left) and 3b(right)
 
 <img width="400" src="https://raw.githubusercontent.com/ComplexityVE/SugarEvax/master/images/noevol_noredist.png">  <img width="400" src="https://raw.githubusercontent.com/ComplexityVE/SugarEvax/master/images/taxation1.png">
 
-| Figure 2a | Figure 2b |
+| Figure 3a | Figure 3b |
 | ---- | ---- |
 | *caption* | *caption* |
 
@@ -88,7 +88,11 @@ Evolution is added to the model through the values of the characteristics of the
 
 Below is the result of our implementation and the paper's implementation:
 
-<img width="500" src="https://raw.githubusercontent.com/ComplexityVE/SugarEvax/master/images/modelEvPop.png"> <img width="280" src="https://raw.githubusercontent.com/ComplexityVE/SugarEvax/master/images/paperEv4.png"> 
+<img width="400" src="https://raw.githubusercontent.com/ComplexityVE/SugarEvax/master/images/modelEvPop.png"> <img width="400" src="https://raw.githubusercontent.com/ComplexityVE/SugarEvax/master/images/paperEv4.png"> 
+
+| Figure 4a | Figure 4b |
+| ---- | ---- |
+| *caption* | *caption* |
 
 ### Taxation and Evolution
 To combine taxation and evolution into a single model we use the evolution characteristics with the taxation, sex, evolution rules. Below is a comparison of the result of our implementation and the paper's:
