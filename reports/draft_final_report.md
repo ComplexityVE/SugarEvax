@@ -33,6 +33,7 @@ To move all of the agents, we shuffle the order of the agents and move them one 
 ##### Figure 1a (left) and 1b (right)
 
 <img width="400" src="https://raw.githubusercontent.com/ComplexityVE/SugarEvax/master/images/modelempty.png"> <img width="400" src="https://raw.githubusercontent.com/ComplexityVE/SugarEvax/master/images/taxation1.png">
+
 | Figure 1a | Figure 1b |
 | ---- | ---- |
 | *Graph of population without evolution or tax over time. Population starts out at 400 agents and drops to approximately 230 in 100 time steps.* | *Bäck, Vermeulen, and Eiben([1](#Bibliography))'s graph of population over time with no evolution and with and without taxation. Population without tax starts out at 400 agents and drops to approximately 240 in 100 time steps.* |
@@ -105,7 +106,7 @@ Below is the result of our implementation and the paper's implementation:
 | ---- | ---- |
 | *Graph of population with evolution and no tax over time. Population oscillates around 400 agents.* | *Bäck, Vermeulen, and Eiben([1](#Bibliography))'s graph of population over time with evolution and with and without taxation. Population without tax oscillates then stabilizes to 500.* |
 
-Figure 4a 
+Figure 4a shows the untaxed, but evolving population oscillating around 400 agents, while Figure 4b shows the population stabilizing to 500. While there is a difference in that stabilizing value, qualitatively, our model is similar to the paper's as it stabilizes to a value that is in the range expected. The fact that more agents survive with evolution rather than dying because of their shorter lifespan is because the evolved population can mate and replace its dead agents. The non evolving population can live forever, but cannot replace any of its agents. Further, the evolving population can pass on the good genes that allowed agents to survive thus increasing the likelihood of the survival of the offspring.
 
 ### Taxation and Evolution
 To combine taxation and evolution into a single model we use the evolution characteristics with the taxation, sex, evolution rules. Below is a comparison of the result of our implementation and the paper's:
@@ -118,6 +119,8 @@ To combine taxation and evolution into a single model we use the evolution chara
 | ---- | ---- |
 | *Graph of population with evolution and with and without tax over time. Population without tax oscillates around 400 agents. Population with tax climbs to 1500 agents in 100 time steps.* | *Bäck, Vermeulen, and Eiben([1](#Bibliography))'s graph of population over time with evolution and with and without taxation. Population without tax oscillates then stabilizes to 500. Population with tax and evolution climbs to approximately 2250 agents in 200 time steps.* |
 
+Figure 5 shows the qualitative similarity between the population that is evolving and is taxed of our model (Figure 5a) and of the paper's (Figure 5b). While our population does not go quite as high as the papers (a difference of 750 agents), the overall behavior is quite similar. As shown above, when taxed, more agents survive. When evolved, more agents survive. It makes sense that when we combine both taxation and evolution, many more agents survive. A combination of agents passing down their good attributes, as well as supporting the poorer agents ensures that more agents have a chance to survive longer.
+
 ## Extension
 
 ### Changing welfare distribution
@@ -125,16 +128,19 @@ For our extension, one thing we decided to explore was adding different welfare 
 
 
 <img width="500" src="https://raw.githubusercontent.com/ComplexityVE/SugarEvax/master/images/wealth_redistribution.png">
+
 *Figure 6: caption*
 
 Next we made our welfare redistribution system slightly more complex by creating 3 different brackets instead of simply dividing the welfare amongst the agents who had less than the mean amount of sugar. We created the brackets by dividing the mean wealth by 3 and adding that number to the mean wealth to get the upper limit of the third bracket and subtracting that number from the mean wealth to get the upper limit of the first bracket. We then gave agents who fell into the first bracket 50% of the welfare to divide evenly amongst themselves. Similarly we gave agents who fell into the second bracket 30% of the welfare to divide evenly amongst themselves and agents who fell into the third bracket the remaining 20% of the welfare to divide evenly amongst themselves. Agents with more sugar than the upper limit of the third bracket did not get any welfare. With this system in place, we ran our model with taxation and no evolution and got the following graph. With our complex system the average population still steadied out at about 310 agents or maybe a bit higher than that.
 
 <img width="500" src="https://raw.githubusercontent.com/ComplexityVE/SugarEvax/master/images/noevol_withredist.png">
+
 *Figure 7: caption*
 
 We ran the same model with both taxation and evolution implemented and got the following graph. With this system in place, the average population spikes up to be be as much as 1800 agents at some times. That said, the average seems to oscillate around about 1500 agents, about 100 agents higher than the average was when welfare was split up equally between all agents.
 
 <img width="500" src="https://raw.githubusercontent.com/ComplexityVE/SugarEvax/master/images/wealth_redistribution_3brackets_labels.png">
+
 *Figure 8: caption*
 
 We suspect that the reason that our bracketed welfare redistribution system did not improve the survival rate by much (measured by average population over time) was because we were already taking more from the agents with more sugar in our bracketed taxation system. Taking more and giving less most likely meant that the agents with a medium amount of sugar were not able to survive in our model. This explains the oscillation we are seeing in our graphs and why the welfare redistribution did not have as much of an effect as we might have liked.
