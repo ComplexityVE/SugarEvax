@@ -2,13 +2,13 @@
 #### By Emily Lepert
 
 #### Question:  What is your understanding of the experiment the team is replicating?  What question does it answer?  How clear is the team's explanation?
-I don't know what the question is. From context I can infer what it might be, but it isn't explicitly stated. I understand what you're modeling but the question or what you are replicating exactly isn't made clear. From my understanding, you are seeing if an increase in interactions between offenders, police, and targets also increases crime rate.
+I don't know what the replication question is. From context I can infer what it might be, but it isn't explicitly stated. I understand what you're modeling but the question or what you are replicating exactly isn't made clear. From my understanding, for your extension you are seeing if an increase in interactions between offenders, police, and targets also increases crime rate.
 
 #### Methodology: Do you understand the methodology?  Does it make sense for the question?  Are there limitations you see that the team did not address?
 I understand how an offender decides on whether or not to commit a crime. I'm a little confused about how you went from having nodes, to a grid of cells. It might be worth talking about how nodes are connected and how agents move from one node to another.
 
 #### Results: Do you understand what the results are (not yet considering their interpretation)?  If they are presented graphically, are the visualizations effective?  Do all figures have labels on the axes and captions?
-The results talk about "time away from home." I'm assuming that you'll talk about it in your interpretation, but you should also talk about what that means before you even show the graph. Graphs make sense and they are all labeled.
+The results talk about "time away from home." I'm assuming that you'll talk about it in your interpretation, but you should also talk about what that means before you even show the graph. Other than that the graphs make sense and they are all labeled.
 
 #### Interpretation: Does the draft report interpret the results as an answer to the motivating question?  Does the argument hold water?
 Not applicable.
