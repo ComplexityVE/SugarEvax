@@ -8,18 +8,19 @@ My understanding of the experiment the team is replicating is an agent based sys
 
 ## Methodology:
 ### Do you understand the methodology?  Does it make sense for the question?  Are there limitations you see that the team did not address?
-
+The methodology does seem to make sense for the question of investigating crime rates with varying starting conditions. I really like the explanation and chart showing an agent's decision to offend.
 
 ## Results:
 ### Do you understand what the results are (not yet considering their interpretation)?  If they are presented graphically, are the visualizations effective?  Do all figures have labels on the axes and captions?
-
+The visualizations are effective but could use a bit more explanation in the text section. The graphs all have descriptive axes labels except for the figure 2 graphs which could use labels and descriptions, but I think that portion is still in progress.
 
 ## Interpretation:
 ### Does the draft report interpret the results as an answer to the motivating question?  Does the argument hold water?
+The draft report lays out the results and figures but does not yet have much interpretation to the question or explanation of what these graphs are showing me. I think adding some of this interpretation will make the report more powerful and will help me to understand better what question about crime rates the paper is really addressing.
 
 ## Replication:
 ### Are the results in the report consistent with the results from the original paper?  If so, how did the
-
+The report specifies that their results are consistent with the results from the original paper but I do not see any graphs from the original paper that are compared to their graphs. If such graphs exist I think it might be nice to include some alongside some of your graphs.
 
 ## Extension:
 ### Does the report explain an extension to the original experiment clearly?  Is it a sensible extension in the sense that it has the potential to answer an interesting question that the original experiment did not answer?
@@ -31,7 +32,8 @@ It seems that the team is in a good place moving forward. They have mostly compl
 
 ## Presentation:
 ### Is the report written in clear, concise, correct language?  Is it consistent with the audience and goals of the report?  Does it violate any of the recommendations in my style guide?
-
+The report is well written in a concise and correct language. I think it is consistent with the audience and goals of the report but could use some further explanation and description of the interpretation and question the experiment is trying to answer.
 
 ## Mechanics:
 ### Is the report in the right directory with the right file name?  Is it formatted professionally in Markdown?  Does it include a meaningful title and the full names of the authors?  Is the bibliography in an acceptable style?
+The file name is correct and the Markdown formatting looks good to me. I like the title and the authors' names are included. The bibliography format looks good to me.
