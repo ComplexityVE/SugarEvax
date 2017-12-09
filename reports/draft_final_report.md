@@ -129,7 +129,7 @@ For our extension, one thing we decided to explore was adding different welfare 
 
 <img width="500" src="https://raw.githubusercontent.com/ComplexityVE/SugarEvax/master/images/wealth_redistribution_correct_label.png">
 
-| Figure 6a |
+| Figure 6 |
 | ---- |
 | *Our graph of population over time for a system with evolution, taxation, and one welfare bracket.* |
 
@@ -137,7 +137,7 @@ Next we made our welfare redistribution system slightly more complex by creating
 
 <img width="500" src="https://raw.githubusercontent.com/ComplexityVE/SugarEvax/master/images/noevol_withredist.png">
 
-| Figure 7a |
+| Figure 7 |
 | ---- |
 | *Our graph of population over time for a system with taxation and three welfare brackets but no evolution.* |
 
@@ -145,7 +145,7 @@ We ran the same model with both taxation and evolution implemented and got the f
 
 <img width="500" src="https://raw.githubusercontent.com/ComplexityVE/SugarEvax/master/images/wealth_redistribution_3brackets_labels.png">
 
-| Figure 8a |
+| Figure 8 |
 | ---- |
 | *Our graph of population over time for a system with evolution, taxation, and three welfare brackets.* |
 
