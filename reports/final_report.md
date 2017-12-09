@@ -2,7 +2,7 @@
 ### By Vicky McDermott and Emily Lepert
 
 ## Abstract
-We replicated the work done by Bäck, Vermeulen, and Eiben([1](#Bibliography)) by implementing taxation and evolution systems in a Sugarscape model. With the same parameters used in the paper and a few tweaks to our model we were able to see results that were qualitatively similar to the ones in the paper. We then extended on the work they had done by experimenting with different welfare and taxation brackets. We found that the population as a whole does just about the same or even better when different percentages of it are given to different wealth brackets as opposed to when the welfare sugar is divided equally.
+We replicate the work done by Bäck, Vermeulen, and Eiben([1](#Bibliography)) by implementing taxation and evolution systems in a Sugarscape model. With the same parameters used in the paper and a few tweaks to our model we are able to see results that are qualitatively similar to the ones in the paper. We then extend on the work done in the paper by experimenting with different welfare and taxation brackets. We find that the population as a whole does just about the same or even better when different percentages of welfare are given to different wealth brackets as opposed to when the welfare sugar is divided equally.
 _________________________________________________________
 
 ## Replication
@@ -41,7 +41,7 @@ To move all of the agents, we shuffle the order of the agents and move them one 
 Figure 1a matches very closely the behavior of Figure 1b's "no-tax" line quantitatively. It makes sense for the population to suddenly drop within the first 100 time steps, because there are too many agents for the space and resources provided. The population falls until there are enough resources to support all agents.
 
 ### Taxation
-Next, we implemented a taxation system on the agents in our model following the same rules and initial conditions specified in the paper. We took taxes from the agents proportional to their wealth at these rates:
+Next, we implement a taxation system on the agents in our model following the same rules and initial conditions specified in the paper. We take taxes from the agents proportional to their wealth at these rates:
 
 | Wealth Between | Base Amount | Additional Taxation |
 | ------- | ------- | ------- |
@@ -50,7 +50,7 @@ Next, we implemented a taxation system on the agents in our model following the 
 | 12 - 20 | 4.8 | 50% |
 | 20 - &infin; | 10 | 60% |
 
-We then added up the total taxation in the environment and gave each agent welfare equal to the total amount of sugar collected from taxation divided by the total number of agents. We found that doing this produced results that were qualitatively similar to the paper but it seemed as if the taxation system in the paper was less generous because larger populations of our agents were surviving. In the sugarscape model with no taxation the population dips down and evens out at an average population of about 225. With taxation, the average population of agents evens out at about 375 agents whereas the average population of agents evens out at about 310 agents in the paper's model with taxation. This can be seen in the graph below.
+We then add up the total taxation in the environment and give each agent welfare equal to the total amount of sugar collected from taxation divided by the total number of agents. We find that doing this produces results that are qualitatively similar to the paper but it seems as if the taxation system in the paper is less generous because larger populations of our agents are surviving. In the sugarscape model with no taxation the population dips down and evens out at an average population of about 225. With taxation, the average population of agents evens out at about 375 agents whereas the average population of agents evens out at about 310 agents in the paper's model with taxation. This can be seen in the graph below.
 
 ##### Figures 2a(left) and 2b(right)
 
@@ -60,7 +60,7 @@ We then added up the total taxation in the environment and gave each agent welfa
 | ---- | ---- |
 | *Our graph of population over time for a system with taxation.* | **Bäck, Vermeulen, and Eiben([1](#Bibliography))'s graph of population over time for a system with taxation.* |
 
-Because they did not fully specify how the welfare was awarded in the paper, we decided to try subtracting a percentage of the sugar from the total taxation collected before dividing it up to give out as welfare. We tried subtracting various values from the total welfare before settling on a level of 15% because 15% gave us a graph which was quantitatively similar to the graph from the original paper. In the application of our model, we can think of this as the proportion of the taxes that the government might take. This seemed to produce results that were more similar to the results from the original paper as can be seen below. In both our model and the paper's model the average population of agents evens out at about 310 agents when there is taxation.
+Because they did not fully specify how the welfare was awarded in the paper, we decide to try subtracting a percentage of the sugar from the total taxation collected before dividing it up to give out as welfare. We try subtracting various values from the total welfare before settling on a level of 15% because 15% gives us a graph which is quantitatively similar to the graph from the original paper. In the application of our model, we can think of this as the proportion of the taxes that the government might take. This produces results that were more similar to the results from the original paper as can be seen below. In both our model and the paper's model the average population of agents evens out at about 310 agents when there is taxation.
 
 ##### Figures 3a(left) and 3b(right)
 
