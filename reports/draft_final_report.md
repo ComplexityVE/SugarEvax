@@ -28,7 +28,7 @@ Every time step, an agent moves by looking at the cells around it with the maxim
 
 Agents die when the amount of sugar they have is less than their metabolism or when their death age is reached.
 
-To move all of the agents, we shuffle the order of the agents and move them one by one. Below is a comparison of the result of our simulation to the paper's.
+To move all of the agents, we shuffle the order of the agents and move them one by one. We run the simulation for 800 time steps. Below is a comparison of the result of our simulation to the paper's.
 
 ##### Figure 1a (left) and 1b (right)
 
