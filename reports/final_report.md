@@ -169,4 +169,5 @@ This book describes an implementation of Sugarscape and evolution that we based 
 
 3. [The Specification of Sugarscape](https://arxiv.org/abs/1505.06012v3)
 Kehoe, arXiv:1505.06012v3 [cs.MA] 7 Nov 2016
+
 This paper describes various rules of Sugarscape conventionally used. We used this resource to clarify the reproduction rules.
