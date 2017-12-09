@@ -124,7 +124,7 @@ Figure 5 shows the qualitative similarity between the population that is evolvin
 ## Extension
 
 ### Changing welfare distribution
-For our extension, one thing we explore is adding different welfare brackets. We expect that by giving more of the welfare to the poorer agents and less of it to the richer agents we will be able to significantly increase the average population over time. For our first experiment of this hypothesis, we split the welfare evenly among agents who have less than the average amount of sugar that agents have at that time step instead of simply giving an equal amount of welfare to all agents regardless of how much sugar they have. Running this model with both evolution and taxation produces the following graph. It is interesting to note that with this system of splitting the welfare only amongst the poorer agents, the population of agents does not do as well as it did with purely taxation and evolution. It now seems to oscillate and winds up steadying out around an oscillation of 400 agents while before when we distributed welfare equally among the agents the population climbed to 1400 agents. We suspect that the reason the population did so poorly was because our welfare redistribution system was not complex enough.
+For our extension, we explore adding different welfare brackets. We expect that by giving more of the welfare to the poorer agents and less of it to the richer agents we will be able to significantly increase the average population over time. For our first experiment of this hypothesis, we split the welfare evenly among agents who have less than the average amount of sugar that agents have at that time step instead of simply giving an equal amount of welfare to all agents regardless of how much sugar they have. Running this model with both evolution and taxation produces the following graph.
 
 
 <img width="500" src="https://raw.githubusercontent.com/ComplexityVE/SugarEvax/master/images/wealth_redistribution_correct_label.png">
@@ -132,6 +132,8 @@ For our extension, one thing we explore is adding different welfare brackets. We
 | Figure 6 |
 | ---- |
 | *Our graph of population over time for a system with evolution, taxation, and one welfare bracket.* |
+
+It is interesting to note that with this system of splitting the welfare only amongst the poorer agents, the population of agents does not do as well as it did with purely taxation and evolution. It now seems to oscillate and winds up steadying out around an oscillation of 400 agents while before when we distributed welfare equally among the agents the population climbed to 1400 agents. We suspect that the reason the population did so poorly was because our welfare redistribution system was not complex enough.
 
 Next we made our welfare redistribution system slightly more complex by creating 3 different brackets instead of simply dividing the welfare amongst the agents who had less than the mean amount of sugar. We created the brackets by dividing the mean wealth by 3 and adding that number to the mean wealth to get the upper limit of the third bracket and subtracting that number from the mean wealth to get the upper limit of the first bracket. We then gave agents who fell into the first bracket 50% of the welfare to divide evenly amongst themselves. Similarly we gave agents who fell into the second bracket 30% of the welfare to divide evenly amongst themselves and agents who fell into the third bracket the remaining 20% of the welfare to divide evenly amongst themselves. Agents with more sugar than the upper limit of the third bracket did not get any welfare. With this system in place, we ran our model with taxation and no evolution and got the following graph. With our complex system, the average population still steadied out at about 310 agents or maybe a bit higher than that.
 
@@ -167,4 +169,5 @@ This book describes an implementation of Sugarscape and evolution that we based 
 
 3. [The Specification of Sugarscape](https://arxiv.org/abs/1505.06012v3)
 Kehoe, arXiv:1505.06012v3 [cs.MA] 7 Nov 2016
+
 This paper describes various rules of Sugarscape conventionally used. We used this resource to clarify the reproduction rules.
