@@ -28,7 +28,7 @@ Every time step, an agent moves by looking at the cells around it with the maxim
 
 Agents die when the amount of sugar they have is less than their metabolism or when their death age is reached.
 
-To move all of the agents, we shuffle the order of the agents and move them one by one. Below is a comparison of the result of our simulation to the paper's.
+To move all of the agents, we shuffle the order of the agents and move them one by one. We run the simulation for 800 time steps. Below is a comparison of the result of our simulation to the paper's.
 
 ##### Figure 1a (left) and 1b (right)
 
@@ -58,7 +58,7 @@ We then added up the total taxation in the environment and gave each agent welfa
 
 | Figure 2a | Figure 2b |
 | ---- | ---- |
-| *Our graph of population over time for a system with taxation.* | *Original graph of population over time for a system with taxation.* |
+| *Our graph of population over time for a system with taxation.* | **Bäck, Vermeulen, and Eiben([1](#Bibliography))'s graph of population over time for a system with taxation.* |
 
 Because they did not fully specify how the welfare was awarded in the paper, we decided to try subtracting a percentage of the sugar from the total taxation collected before dividing it up to give out as welfare. We tried subtracting various values from the total welfare before settling on a level of 15% because 15% gave us a graph which was quantitatively similar to the graph from the original paper. In the application of our model, we can think of this as the proportion of the taxes that the government might take. This seemed to produce results that were more similar to the results from the original paper as can be seen below. In both our model and the paper's model the average population of agents evens out at about 310 agents when there is taxation.
 
@@ -68,7 +68,7 @@ Because they did not fully specify how the welfare was awarded in the paper, we 
 
 | Figure 3a | Figure 3b |
 | ---- | ---- |
-| *Our graph of population over time for a system with taxation and some welfare given to government.* | *Original graph of population over time for a system with taxation.* |
+| *Our graph of population over time for a system with taxation and some welfare given to government.* | **Bäck, Vermeulen, and Eiben([1](#Bibliography))'s graph of population over time for a system with taxation.* |
 
 ### Sex and Evolution
 To implement sex and evolution in our model, we change the values of some characteristics and include more. Below is the table with the updated values:
@@ -129,7 +129,7 @@ For our extension, one thing we explore is adding different welfare brackets. We
 
 <img width="500" src="https://raw.githubusercontent.com/ComplexityVE/SugarEvax/master/images/wealth_redistribution_correct_label.png">
 
-| Figure 6a |
+| Figure 6 |
 | ---- |
 | *Our graph of population over time for a system with evolution, taxation, and one welfare bracket.* |
 
@@ -137,7 +137,7 @@ Next we made our welfare redistribution system slightly more complex by creating
 
 <img width="500" src="https://raw.githubusercontent.com/ComplexityVE/SugarEvax/master/images/noevol_withredist.png">
 
-| Figure 7a |
+| Figure 7 |
 | ---- |
 | *Our graph of population over time for a system with taxation and three welfare brackets but no evolution.* |
 
@@ -145,7 +145,7 @@ We ran the same model with both taxation and evolution implemented and got the f
 
 <img width="500" src="https://raw.githubusercontent.com/ComplexityVE/SugarEvax/master/images/wealth_redistribution_3brackets_labels.png">
 
-| Figure 8a |
+| Figure 8 |
 | ---- |
 | *Our graph of population over time for a system with evolution, taxation, and three welfare brackets.* |
 
@@ -159,3 +159,13 @@ From our findings, we can conclude that including a welfare redistribution syste
 Bäck, Vermeulen, Eiben, S.-H Cheng, P.Wang, Eds., Proceedings of the Second International Workshop on Computational Intelligence in Economics and Financ. JCIS Press, 2002, pp. 1151-1156
 
 This paper implements a SugarScape where taxation on the society and procreation are present. Taxation is implemented so that at each time step, each agent gives up a percentage of their wealth, and the total wealth is redistributed evenly across the population. The percentage taken depends on the wealth of the agent. Evolution is implemented by allowing the agents to reproduce. Each newborn agent gets half of the starting wealth of the father and mother. Its metabolism, vision, age of death, and child bearing age are all influenced by its parents with "Mendelian Rules." The paper finds that with evolution and a taxation system, the sytem has a very high agent population, but lower average wealth, while no taxation or evolution has a low population, but high average wealth. This intuitively makes sense.
+
+2. [Think Complexity](http://greenteapress.com/complexity2/thinkcomplexity2.pdf)
+Downey, Green Tea Press. Needham, Massachussetts, 2017, pp. 147-187
+
+This book describes an implementation of Sugarscape and evolution that we based our model off of.
+
+3. [The Specification of Sugarscape](https://arxiv.org/abs/1505.06012v3)
+Kehoe, arXiv:1505.06012v3 [cs.MA] 7 Nov 2016
+This paper describes various rules of Sugarscape conventionally used. We used this resource to clarify the reproduction rules.
+
