@@ -58,7 +58,7 @@ We then add up the total taxation in the environment and give each agent welfare
 
 | Figure 2a | Figure 2b |
 | ---- | ---- |
-| *Our graph of population over time for a system with taxation.* | **Bäck, Vermeulen, and Eiben([1](#Bibliography))'s graph of population over time for a system with taxation.* |
+| *Our graph of population over time for a system with taxation.* | *Bäck, Vermeulen, and Eiben([1](#Bibliography))'s graph of population over time for a system with taxation.* |
 
 Because they did not fully specify how the welfare was awarded in the paper, we decide to try subtracting a percentage of the sugar from the total taxation collected before dividing it up to give out as welfare. We try subtracting various values from the total welfare before settling on a level of 15% because 15% gives us a graph which is quantitatively similar to the graph from the original paper. In the application of our model, we can think of this as the proportion of the taxes that the government might take. This produces results that were more similar to the results from the original paper as can be seen below. In both our model and the paper's model the average population of agents evens out at about 310 agents when there is taxation.
 
@@ -94,7 +94,7 @@ An agent is able to mate if it meets these requirements:
 
 Two agents mate if they are of opposite sexes. The b_agent they produce is born on a neighboring cell if there is an empty one available. If not, then no new b_agent is created. The b_agent receives sugar from both parents. The amount of sugar each parent donates is equivalent to half of the amount of sugar the parents's initial sugar.
 
-Evolution is added to the model through the values of the characteristics of the b_agents. The gender of the b_agent is randomly chosen. The b_agent's metabolism, vision, age of death, and child bearing age are set by randomly choosing each one from the parent's characteristics. For example, if parent 1 had m,v,d,c as it's genetic makeup, and parent 2 had M,V,D,C, then the b_agent has a 50% chance of getting either values. There are 16 possibilities: (m,V,D,C), (m,v,D,c), (M,V,d,C), etc...
+Evolution is added to the model through the values of the characteristics of the b_agents. The gender of the b_agent is randomly chosen. The b_agent's metabolism, vision, age of death, and child bearing age are set by randomly choosing each one from the parent's characteristics. For example, if parent 1 had m (metabolism), v (vision), d (death age), c (child bearing age) as it's genetic makeup, and parent 2 had M,V,D,C, then the b_agent has a 50% chance of getting either values. There are 16 possibilities: (m,V,D,C), (m,v,D,c), (M,V,d,C), etc...
 
 Below is the result of our implementation and the paper's implementation:
 
